@@ -36,7 +36,7 @@ CREATE TABLE `AdminDetails` (
 
 LOCK TABLES `AdminDetails` WRITE;
 /*!40000 ALTER TABLE `AdminDetails` DISABLE KEYS */;
-INSERT INTO `AdminDetails` VALUES (1,'rohit','ED0gxzcsRbaceSB/eZSlwQ=='),(2,'sakshi','wWbOaKPWPKi/QFc9GY7wsw==');
+INSERT INTO `AdminDetails` VALUES (1,'rohit','ED0gxzcsRbaceSB/eZSlwQ=='),(2,'sakshi','4uUaiMINL/Xa8ZjMwMYvbA==');
 /*!40000 ALTER TABLE `AdminDetails` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -273,4 +273,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-07-05  1:30:59
+-- Dump completed on 2015-07-05  2:19:28
