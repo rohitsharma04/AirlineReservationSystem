@@ -27,7 +27,7 @@ CREATE TABLE `AdminDetails` (
   `adminName` varchar(255) DEFAULT NULL,
   `password` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`adminId`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -36,7 +36,6 @@ CREATE TABLE `AdminDetails` (
 
 LOCK TABLES `AdminDetails` WRITE;
 /*!40000 ALTER TABLE `AdminDetails` DISABLE KEYS */;
-INSERT INTO `AdminDetails` VALUES (1,'rohit','ED0gxzcsRbaceSB/eZSlwQ=='),(2,'sakshi','4uUaiMINL/Xa8ZjMwMYvbA==');
 /*!40000 ALTER TABLE `AdminDetails` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -62,6 +61,7 @@ CREATE TABLE `AerodrumMaster` (
 
 LOCK TABLES `AerodrumMaster` WRITE;
 /*!40000 ALTER TABLE `AerodrumMaster` DISABLE KEYS */;
+INSERT INTO `AerodrumMaster` VALUES (1,'DumDum','Kolkata','WestBengal'),(2,'Indira Gandhi','Delhi','Delhi');
 /*!40000 ALTER TABLE `AerodrumMaster` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -85,7 +85,7 @@ CREATE TABLE `ClassMaster` (
 
 LOCK TABLES `ClassMaster` WRITE;
 /*!40000 ALTER TABLE `ClassMaster` DISABLE KEYS */;
-INSERT INTO `ClassMaster` VALUES (1,'Business'),(2,'Economic'),(3,'First');
+INSERT INTO `ClassMaster` VALUES (1,'First'),(2,'Business'),(3,'Economic');
 /*!40000 ALTER TABLE `ClassMaster` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -109,6 +109,7 @@ CREATE TABLE `CompanyMaster` (
 
 LOCK TABLES `CompanyMaster` WRITE;
 /*!40000 ALTER TABLE `CompanyMaster` DISABLE KEYS */;
+INSERT INTO `CompanyMaster` VALUES (1,'Air India'),(2,'Pan Am');
 /*!40000 ALTER TABLE `CompanyMaster` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -167,7 +168,7 @@ CREATE TABLE `DayMaster` (
 
 LOCK TABLES `DayMaster` WRITE;
 /*!40000 ALTER TABLE `DayMaster` DISABLE KEYS */;
-INSERT INTO `DayMaster` VALUES (1,'Monday'),(2,'Tuesday'),(3,'Wednesday'),(4,'Thursday'),(5,'Friday'),(6,'Saturday'),(7,'Sunday');
+INSERT INTO `DayMaster` VALUES (1,'Sunday'),(2,'Monday'),(3,'Tuesday'),(4,'Wednesday'),(5,'Thursday'),(6,'Friday'),(7,'Saturday');
 /*!40000 ALTER TABLE `DayMaster` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -210,9 +211,12 @@ CREATE TABLE `FlightFareMap` (
   `numberOfSeats` int(11) NOT NULL,
   `classId` int(11) DEFAULT NULL,
   `flightNumber` int(11) DEFAULT NULL,
+  `fares` int(11) DEFAULT NULL,
   PRIMARY KEY (`ffid`),
   KEY `FK_boimtybhc58pb9i00ma1plm0x` (`classId`),
   KEY `FK_5tdwtm58g6yc2y2diwske1xrh` (`flightNumber`),
+  KEY `FK_kyeepyoqeogd557e9i4sfw4xx` (`fares`),
+  CONSTRAINT `FK_kyeepyoqeogd557e9i4sfw4xx` FOREIGN KEY (`fares`) REFERENCES `FlightMaster` (`flightNumber`),
   CONSTRAINT `FK_5tdwtm58g6yc2y2diwske1xrh` FOREIGN KEY (`flightNumber`) REFERENCES `FlightMaster` (`flightNumber`),
   CONSTRAINT `FK_boimtybhc58pb9i00ma1plm0x` FOREIGN KEY (`classId`) REFERENCES `ClassMaster` (`classId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -236,22 +240,19 @@ DROP TABLE IF EXISTS `FlightMaster`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `FlightMaster` (
   `flightNumber` int(11) NOT NULL,
-  `arrivalTime` bigint(20) NOT NULL,
-  `departureTime` bigint(20) NOT NULL,
+  `arrivalTime` time DEFAULT NULL,
+  `departureTime` time DEFAULT NULL,
   `flightName` varchar(255) DEFAULT NULL,
   `companyId` int(11) DEFAULT NULL,
   `destinationId` int(11) DEFAULT NULL,
-  `fare` int(11) DEFAULT NULL,
   `sourceId` int(11) DEFAULT NULL,
   PRIMARY KEY (`flightNumber`),
   KEY `FK_cxguqo813j91od22h71rbjuv` (`companyId`),
   KEY `FK_8wx21iu6dk7cr3gxw8t0762pr` (`destinationId`),
-  KEY `FK_nlk6xjfnf11qw42tsvcoj9wft` (`fare`),
   KEY `FK_l6verq6kaw54rlby0dyg668nb` (`sourceId`),
   CONSTRAINT `FK_l6verq6kaw54rlby0dyg668nb` FOREIGN KEY (`sourceId`) REFERENCES `AerodrumMaster` (`aerodrumId`),
   CONSTRAINT `FK_8wx21iu6dk7cr3gxw8t0762pr` FOREIGN KEY (`destinationId`) REFERENCES `AerodrumMaster` (`aerodrumId`),
-  CONSTRAINT `FK_cxguqo813j91od22h71rbjuv` FOREIGN KEY (`companyId`) REFERENCES `CompanyMaster` (`companyId`),
-  CONSTRAINT `FK_nlk6xjfnf11qw42tsvcoj9wft` FOREIGN KEY (`fare`) REFERENCES `FlightFareMap` (`ffid`)
+  CONSTRAINT `FK_cxguqo813j91od22h71rbjuv` FOREIGN KEY (`companyId`) REFERENCES `CompanyMaster` (`companyId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -261,6 +262,7 @@ CREATE TABLE `FlightMaster` (
 
 LOCK TABLES `FlightMaster` WRITE;
 /*!40000 ALTER TABLE `FlightMaster` DISABLE KEYS */;
+INSERT INTO `FlightMaster` VALUES (1,'16:00:00','14:00:00','GreenLantern',1,2,1);
 /*!40000 ALTER TABLE `FlightMaster` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -273,4 +275,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-07-05  2:19:28
+-- Dump completed on 2015-07-05 17:34:47
