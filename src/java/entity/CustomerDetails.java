@@ -2,6 +2,7 @@ package entity;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -9,6 +10,7 @@ import javax.persistence.ManyToOne;
 @Entity
 public class CustomerDetails implements Serializable {
     @Id
+    @GeneratedValue
     private int pnrNumber;
     private String passportId;
     private String customerName;

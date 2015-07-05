@@ -2,6 +2,7 @@ package entity;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -10,6 +11,7 @@ import javax.persistence.ManyToOne;
 public class FlightFareMap implements Serializable {
 
     @Id
+    @GeneratedValue
     private int ffid;
     @ManyToOne
     @JoinColumn(name="flightNumber")

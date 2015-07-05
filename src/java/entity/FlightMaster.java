@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.sql.Time;
 import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -15,6 +16,7 @@ import javax.persistence.OneToMany;
 public class FlightMaster implements Serializable {
 
     @Id
+    @GeneratedValue
     private int flightNumber;
     private String flightName;
 
@@ -33,8 +35,8 @@ public class FlightMaster implements Serializable {
     private Time arrivalTime;
 
     @OneToMany
-    @JoinColumn(name = "fares")
-    private List<FlightFareMap> fare;
+    @JoinColumn(name = "flightNumber")
+    private List<FlightFareMap> fares;
 
     @OneToMany(targetEntity = CustomerDetails.class, mappedBy = "flightNumber")
     private List<CustomerDetails> customers;
@@ -77,7 +79,7 @@ public class FlightMaster implements Serializable {
     }
 
     public List<FlightFareMap> getFare() {
-        return fare;
+        return fares;
     }
 
     public List<CustomerDetails> getCustomers() {
@@ -117,7 +119,7 @@ public class FlightMaster implements Serializable {
     }
 
     public void setFare(List<FlightFareMap> fare) {
-        this.fare = fare;
+        this.fares = fare;
     }
 
     public void setCustomers(List<CustomerDetails> customers) {

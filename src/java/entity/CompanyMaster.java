@@ -7,6 +7,7 @@ package entity;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
@@ -14,6 +15,7 @@ import javax.persistence.OneToMany;
 public class CompanyMaster implements Serializable {
 
     @Id
+    @GeneratedValue
     private int companyId;
     private String companyName;
     @OneToMany(targetEntity = FlightMaster.class, mappedBy = "companyId")
