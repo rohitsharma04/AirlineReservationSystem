@@ -13,7 +13,7 @@ public class Encrypt {
 
     public static void main(String[] args) {
         try {
-            String msg = "sharma";
+            String msg = "Happy Birthday Bro ... !!!";
             String enc = encrypt(msg);
             String dec = decrypt(enc);
             System.out.println(enc);

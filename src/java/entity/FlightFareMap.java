@@ -5,14 +5,13 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 
 @Entity
 public class FlightFareMap implements Serializable {
 
     @Id
     private int ffid;
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name="flightNumber")
     private FlightMaster flightNumber;
     @ManyToOne

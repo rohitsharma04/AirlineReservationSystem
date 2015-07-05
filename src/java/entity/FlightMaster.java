@@ -1,6 +1,7 @@
 package entity;
 
 import java.io.Serializable;
+import java.sql.Time;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -9,7 +10,6 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 
 @Entity
 public class FlightMaster implements Serializable {
@@ -19,19 +19,23 @@ public class FlightMaster implements Serializable {
     private String flightName;
 
     @ManyToOne
-    @JoinColumn(name="companyId")
+    @JoinColumn(name = "companyId")
     private CompanyMaster companyId;
+
     @ManyToOne
-    @JoinColumn(name="sourceId")
+    @JoinColumn(name = "sourceId")
     private AerodrumMaster sourceId;
+
     @ManyToOne
-    @JoinColumn(name="destinationId")
+    @JoinColumn(name = "destinationId")
     private AerodrumMaster destinationId;
-    private long departureTime;
-    private long arrivalTime;
-    @OneToOne
-    @JoinColumn(name="fare")
-    private FlightFareMap fare;
+    private Time departureTime;
+    private Time arrivalTime;
+
+    @OneToMany
+    @JoinColumn(name = "fares")
+    private List<FlightFareMap> fare;
+
     @OneToMany(targetEntity = CustomerDetails.class, mappedBy = "flightNumber")
     private List<CustomerDetails> customers;
 
@@ -64,15 +68,15 @@ public class FlightMaster implements Serializable {
         return destinationId;
     }
 
-    public long getDepartureTime() {
+    public Time getDepartureTime() {
         return departureTime;
     }
 
-    public long getArrivalTime() {
+    public Time getArrivalTime() {
         return arrivalTime;
     }
 
-    public FlightFareMap getFare() {
+    public List<FlightFareMap> getFare() {
         return fare;
     }
 
@@ -104,15 +108,15 @@ public class FlightMaster implements Serializable {
         this.destinationId = destinationId;
     }
 
-    public void setDepartureTime(long departureTime) {
+    public void setDepartureTime(Time departureTime) {
         this.departureTime = departureTime;
     }
 
-    public void setArrivalTime(long arrivalTime) {
+    public void setArrivalTime(Time arrivalTime) {
         this.arrivalTime = arrivalTime;
     }
 
-    public void setFare(FlightFareMap fare) {
+    public void setFare(List<FlightFareMap> fare) {
         this.fare = fare;
     }
 
@@ -123,5 +127,6 @@ public class FlightMaster implements Serializable {
     public void setDays(List<DayMaster> days) {
         this.days = days;
     }
+
 
 }
