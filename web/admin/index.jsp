@@ -21,5 +21,11 @@
     </head>
     <body> 
         <h1>Welcome Admin</h1>
+        <%
+            String username = (String) session.getAttribute("username");
+        %>
+        <h1>
+            <%="Welcome " + username%>
+        </h1>
     </body>
 </html>
