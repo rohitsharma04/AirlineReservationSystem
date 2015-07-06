@@ -60,27 +60,28 @@ public class AddFlightHandler extends HttpServlet {
             arrivalTime = Time.valueOf(arrival);
 
             //ClassMaster Object
-            ClassMaster c = new ClassMaster();
-
+            ClassMaster c1 = new ClassMaster();
+            ClassMaster c2 = new ClassMaster();
+            ClassMaster c3 = new ClassMaster();
             //Creating FlightFareMap objects
             //First Class
-            c.setClassId(1);
+            c1.setClassId(1);
             FlightFareMap ffm1 = new FlightFareMap();
-            ffm1.setClassId(c);
+            ffm1.setClassId(c1);
             ffm1.setFare(Integer.parseInt(fare1));
             ffm1.setNumberOfSeats(Integer.parseInt(seats1));
 
             //Business Class
-            c.setClassId(2);
+            c2.setClassId(2);
             FlightFareMap ffm2 = new FlightFareMap();
-            ffm2.setClassId(c);
+            ffm2.setClassId(c2);
             ffm2.setFare(Integer.parseInt(fare2));
             ffm2.setNumberOfSeats(Integer.parseInt(seats2));
 
             //Economy Class
-            c.setClassId(3);
+            c3.setClassId(3);
             FlightFareMap ffm3 = new FlightFareMap();
-            ffm3.setClassId(c);
+            ffm3.setClassId(c3);
             ffm3.setFare(Integer.parseInt(fare3));
             ffm3.setNumberOfSeats(Integer.parseInt(seats3));
 
