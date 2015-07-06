@@ -153,7 +153,7 @@
                         if (date != null) {
                             d = Date.valueOf(date);
                             DayMaster day = (DayMaster) s.get(DayMaster.class, d.getDay() + 1);
-                            out.println("<h1>" + day.getDayName() + "</h1>");
+                            //out.println("<h1>" + day.getDayName() + "</h1>");
                             List<FlightMaster> flights = day.getFlights();
                             Boolean isFlightFound = false;
                             for (FlightMaster flight : flights) {
@@ -162,7 +162,7 @@
                                     isFlightFound = true;
 
                                     //out.println("Flight Found");
-%>
+                    %>
                     <table>
                         <tr>
                             <td>
