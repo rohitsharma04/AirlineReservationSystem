@@ -1,41 +1,44 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package fillingdata;
 
+import com.sun.org.apache.xml.internal.security.utils.EncryptionConstants;
 import daolayer.HibernateDAOLayer;
+import encryption.Encrypt;
+import entity.AdminDetails;
 import entity.AerodrumMaster;
 import java.util.Scanner;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-public class AeroDrumMasterDataFilling {
+/**
+ *
+ * @author rohit
+ */
+public class AdminDetailsDataFilling {
 
     public static void main(String[] args) {
-        int aerodrumId;
-        String aerodrumName;
-        String city;
-        String state;
+        String adminName;
+        String password;
         Scanner in = new Scanner(System.in);
         Boolean flag = true;
         Session session = HibernateDAOLayer.getSession();
         while (flag) {
             try {
-                System.out.println("Enter the Aerodrum details :");
-                // System.out.print("ID :");
-                //aerodrumId = Integer.parseInt(in.nextLine());
+                System.out.println("Enter the Admin details :");
                 System.out.print("Name :");
-                aerodrumName = in.nextLine();
-                System.out.print("State :");
-                state = in.nextLine();
-                System.out.print("City :");
-                city = in.nextLine();
-
-                AerodrumMaster aerodrum = new AerodrumMaster();
-                //aerodrum.setAerodrumId(aerodrumId);
-                aerodrum.setAerodrumName(aerodrumName);
-                aerodrum.setState(state);
-                aerodrum.setCity(city);
+                adminName = in.nextLine();
+                System.out.print("Password :");
+                password = in.nextLine();
+                AdminDetails admin = new AdminDetails();
+                admin.setAdminName(adminName);
+                admin.setPassword(Encrypt.encrypt(password));
 
                 Transaction transaction = session.beginTransaction();
-                session.save(aerodrum);
+                session.save(admin);
                 transaction.commit();
 
                 System.out.print("Do you want to continue(y/n) :");

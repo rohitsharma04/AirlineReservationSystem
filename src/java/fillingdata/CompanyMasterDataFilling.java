@@ -16,13 +16,13 @@ public class CompanyMasterDataFilling {
         while (flag) {
             try {
                 System.out.println("Enter the Company details :");
-                System.out.print("ID :");
-                companyId = Integer.parseInt(in.nextLine());
+                //System.out.print("ID :");
+                //companyId = Integer.parseInt(in.nextLine());
                 System.out.print("Name :");
                 companyName = in.nextLine();
 
                 CompanyMaster company = new CompanyMaster();
-                company.setCompanyId(companyId);
+                //company.setCompanyId(companyId);
                 company.setCompanyName(companyName);
                 
                 Transaction transaction = session.beginTransaction();
