@@ -32,7 +32,7 @@ public class Login extends HttpServlet {
                 if (rememberme != null) {
                     session.setMaxInactiveInterval(60 * 60 * 24 * 30);
                 }
-                response.sendRedirect("admin");
+                response.sendRedirect("cpanel");
             } else {
                 String message = "Invalid Username or Password";
                 request.setAttribute("message", message);
