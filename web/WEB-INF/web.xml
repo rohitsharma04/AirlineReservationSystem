@@ -12,9 +12,25 @@
         <servlet-name>Login</servlet-name>
         <servlet-class>admin.Login</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AddFlightHandler</servlet-name>
+        <servlet-class>admin.AddFlightHandler</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CancelFlightHandler</servlet-name>
+        <servlet-class>admin.CancelFlightHandler</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/login</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddFlightHandler</servlet-name>
+        <url-pattern>/cpanel/addflighthandler</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CancelFlightHandler</servlet-name>
+        <url-pattern>/cpanel/cancelflighthandler</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
