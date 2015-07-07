@@ -32,7 +32,7 @@ public class AddFlightHandler extends HttpServlet {
         String flightName = request.getParameter("flightName");
         String source = request.getParameter("sourceId");
         String destination = request.getParameter("destinationId");
-        String dayId = request.getParameter("dayId");
+        String dayId[] = request.getParameterValues("dayId");
         String departure = request.getParameter("departureTime") + ":00";
         String arrival = request.getParameter("arrivalTime") + ":00";
         String fare1 = request.getParameter("fare1");
@@ -91,10 +91,12 @@ public class AddFlightHandler extends HttpServlet {
             ffm.add(ffm3);
 
             //DayMaster Object
-            DayMaster d = new DayMaster();
-            d.setDayId(Integer.parseInt(dayId));
-            //Adding day object to the list of days
-            days.add(d);
+            for (String day : dayId) {
+                DayMaster d = new DayMaster();
+                d.setDayId(Integer.parseInt(day));
+                //Adding day object to the list of days
+                days.add(d);
+            }
 
             //Creating FlightMasterObject and Setting All the Properties
             FlightMaster flight = new FlightMaster();

@@ -148,9 +148,9 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>Day:</td>
+                        <td>Day(Multiple):</td>
                         <td>
-                            <select class="border" name="dayId">
+                            <select class="border" name="dayId" multiple>
                                 <option selected>SELECT DAY</option>
                                 <%
                                     for (DayMaster day : listOfDays) {
