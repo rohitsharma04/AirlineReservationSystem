@@ -49,13 +49,14 @@ public class ReservationHandler extends HttpServlet {
             customer.setContactNumber(contactNumber);
             customer.setClassId(c);
             customer.setFlightNumber(flight);
+            customer.setReservationDate(Date.valueOf(dateOfJourney));
 
             Session session = HibernateDAOLayer.getSession();
             Transaction transaction = session.beginTransaction();
             session.save(customer);
             transaction.commit();
         } catch (Exception e) {
-            //       e.printStackTrace();
+            e.printStackTrace();
             String message = "Error : " + e.toString();
             request.setAttribute("message", message);
             RequestDispatcher dispatcher = request.getRequestDispatcher("bookings.jsp");
