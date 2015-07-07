@@ -139,9 +139,7 @@
                         </table>
                     </form>
                 </div>
-                <div class="res"><!--style="display:none;"-->
-
-                    <%-- Printing Flight Details if found --%>
+                <%-- Printing Flight Details if found --%>
                     <%
                         //When Search is entered
                         String sourceId = request.getParameter("sourceId");
@@ -163,6 +161,7 @@
 
                                     //out.println("Flight Found");
                     %>
+                <div class="res"><!--style="display:none;"-->   
                     <table>
                         <tr>
                             <td>
@@ -204,17 +203,16 @@
                             <td colspan=2><a href="#" style="float:left;"class="button2"><< BACK</a></td>
                         </tr>
                     </table>
-
-                    <%                                                }
-                        }
-                        if (!isFlightFound) {
-                    %>
-                    <h3 style="font-size:23px;">No Flights Found</h3>
-                    <%
-                            }
-                        }
-                    %>
                 </div>
+                <%                                                }
+                    }
+                    if (!isFlightFound) {
+                %>
+                <h3 style="font-size:23px;">No Flights Found</h3>
+                <%
+                        }
+                    }
+                %>
             </section>
         </div>
         <div class="body2">

@@ -83,16 +83,15 @@
                             <%-- Printing Message from the addflighthandler --%>
                             <%
                                 String message = (String) request.getAttribute("message");
-                                if (message != null) {
+                                if (message != null)
+                                {
                             %>
                             <tr>
                                 <td colspan="2">
                                     <h3 style="color: red;"><%=message%></h3>
                                 </td>
                             </tr>
-                            <%
-                                }
-                            %>
+                            <%}%>
 
                             <tr>
                                 <td colspan="2">

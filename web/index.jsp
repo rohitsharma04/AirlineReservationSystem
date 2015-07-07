@@ -24,15 +24,23 @@
         <title>AirLines</title>
         <meta charset="utf-8">
         <link rel="stylesheet" href="css/reset.css" type="text/css" media="all">
-        <link rel="stylesheet" href="css/layout.css" type="text/css" media="all">
-        <link rel="stylesheet" href="css/style.css" type="text/css" media="all">
-        <link href="css/searchStyle.css" rel="stylesheet" type="text/css" />
-        <script type="text/javascript" src="js/jquery-1.4.2.js" ></script>
-        <script type="text/javascript" src="js/cufon-yui.js"></script>
-        <script type="text/javascript" src="js/cufon-replace.js"></script>
-        <script type="text/javascript" src="js/Myriad_Pro_italic_600.font.js"></script>
-        <script type="text/javascript" src="js/Myriad_Pro_italic_400.font.js"></script>
-        <script type="text/javascript" src="js/Myriad_Pro_400.font.js"></script>
+		<link rel="stylesheet" href="css/layout.css" type="text/css" media="all">
+		<link rel="stylesheet" href="css/style.css" type="text/css" media="all">
+		<link href="css/searchStyle.css" rel="stylesheet" type="text/css" />
+		<link rel="stylesheet" href="themes/default/default.css" type="text/css" media="screen" />
+		<link rel="stylesheet" href="themes/light/light.css" type="text/css" media="screen" />
+		<link rel="stylesheet" href="themes/dark/dark.css" type="text/css" media="screen" />
+		<link rel="stylesheet" href="themes/bar/bar.css" type="text/css" media="screen" />
+		<link rel="stylesheet" href="css/nivo-slider.css" type="text/css" media="screen" />
+		
+		<script type="text/javascript" src="js/jquery-1.4.2.js" ></script>
+		<script type="text/javascript" src="js/cufon-yui.js"></script>
+		<script type="text/javascript" src="js/cufon-replace.js"></script>
+		<script type="text/javascript" src="js/jquery-1.9.0.min.js"></script>
+		<script type="text/javascript" src="js/jquery.nivo.slider.js"></script>
+		<script type="text/javascript" src="js/Myriad_Pro_italic_600.font.js"></script>
+		<script type="text/javascript" src="js/Myriad_Pro_italic_400.font.js"></script>
+		<script type="text/javascript" src="js/Myriad_Pro_400.font.js"></script>
     </head>
     <body id="page1">
         <!-- START PAGE SOURCE -->
@@ -64,12 +72,17 @@
             </div>
         </div>
         <div class="main">
-            <div id="banner">
-                <div class="text1"> COMFORT<span>Guaranteed</span>
-
-                </div>
-            </div>
-        </div>
+		  <div id="wrapper">
+			<div class="slider-wrapper theme-default">
+				<div id="slider" class="nivoSlider">
+					<img src="images/slider1.jpg" data-thumb="images/slider1.jpg" alt="" />
+					<img src="images/slider2.jpg" data-thumb="images/slider2.jpg" alt="" />
+					<img src="images/slider3.jpg" data-thumb="images/slider3.jpg" alt=""  />
+					<img src="images/slider4.jpg" data-thumb="images/slider4.jpg" alt=""  />
+				</div>
+			</div>
+		  </div>
+		</div>
         <div class="main">
             <section id="content" >
                 <h2 >Airline Reservation System</h2>
@@ -201,6 +214,35 @@
         <script>
             document.getElementById('datePicker').valueAsDate = new Date();
         </script>
+		<script type="text/javascript">
+    $(window).load(function() {
+        $('#slider').nivoSlider();
+    });
+    </script>
+	<script>
+		$('#slider').nivoSlider({
+			effect: 'random',                 // Specify sets like: 'fold,fade,sliceDown'
+			slices: 15,                     // For slice animations
+			boxCols: 8,                     // For box animations
+			boxRows: 4,                     // For box animations
+			animSpeed: 500,                 // Slide transition speed
+			pauseTime: 3000,                 // How long each slide will show
+			startSlide: 0,                     // Set starting Slide (0 index)
+			directionNav: true,             // Next & Prev navigation
+			controlNav: true,                 // 1,2,3... navigation
+			controlNavThumbs: false,         // Use thumbnails for Control Nav
+			pauseOnHover: true,             // Stop animation while hovering
+			manualAdvance: false,             // Force manual transitions
+			prevText: 'Prev',                 // Prev directionNav text
+			nextText: 'Next',                 // Next directionNav text
+			randomStart: true,             // Start on a random slide
+			beforeChange: function(){},     // Triggers before a slide transition
+			afterChange: function(){},         // Triggers after a slide transition
+			slideshowEnd: function(){},     // Triggers after all slides have been shown
+			lastSlide: function(){},         // Triggers when last slide is shown
+			afterLoad: function(){}         // Triggers when slider has loaded
+		});
+	</script>
         <!-- END PAGE SOURCE -->
     </body>
 </html>
