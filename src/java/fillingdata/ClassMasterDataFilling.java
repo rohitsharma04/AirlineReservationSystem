@@ -11,11 +11,11 @@ public class ClassMasterDataFilling {
        
         ClassMaster c1 = new ClassMaster();
         c1.setClassId(1);
-        c1.setClassName("First");
+        c1.setClassName("Business");
         
         ClassMaster c2 = new ClassMaster();
         c2.setClassId(2);
-        c2.setClassName("Business");
+        c2.setClassName("First");
         
         ClassMaster c3 = new ClassMaster();
         c3.setClassId(3);
