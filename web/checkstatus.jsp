@@ -1,3 +1,10 @@
+<%@page import="entity.AerodrumMaster"%>
+<%@page import="entity.ClassMaster"%>
+<%@page import="java.util.List"%>
+<%@page import="org.hibernate.criterion.Restrictions"%>
+<%@page import="org.hibernate.Criteria"%>
+<%@page import="entity.FlightMaster"%>
+<%@page import="org.hibernate.Session"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -59,28 +66,54 @@
 	<a href="#" style="float:left;"class="button1 current">CHECK FLIGHT STATUS</a>
 	<a href="pnrstatus.jsp" style="float:left;"class="button1">CHECK PNR STATUS</a>
 	</div>
-	<div class="cancel"> <!--style="display:none;"--> 
+      <%
+      String fno=request.getParameter("flightno");
+                        if(fno==null)
+                        {
+       %>
+      <form action="checkstatus.jsp" method="get">
+	  <div class="cancel" > <!--style="display:none;"--> 
 		<div class="up">
 			<span><b>ENTER FLIGHT NO:</b></span>
-			<input type="text" name="pnrno" class="border"/>
+			<input type="text" name="flightno" class="border"/>
 		</div>
-		<a href="#" style="float:left;"class="button2">CHECK STATUS</a>
+		<input type="submit" value="CHECK STATUS" style="float:left;" class="button2"/>
 	  </div>
+      </form>
+                <% }  
+                        else
+                        {
+                            int flightno=Integer.parseInt(fno);
+                            Session s = daolayer.HibernateDAOLayer.getSession();
+                            Criteria c = s.createCriteria(FlightMaster.class);
+                            c.add(Restrictions.eq("flightNumber", flightno));
+                            List <FlightMaster> list=c.list();
+                    %>
 	  <div class="pnr" ><!--style="display:none;"-->
 		<br>
-			<span><b>FLIGHT DETAILS OF P279 ARE:</b></span>
+			<span><b>FLIGHT DETAILS OF <%= flightno %> ARE:</b></span>
 			<table>
 				<tr>
 					<td>Flight Name:</td>
-					<td></td>
+                                        <td><%= list.get(0).getFlightName() %></td>
 				</tr>
 				<tr>
 					<td>Departure City:</td>
-					<td></td>
+					<td>
+                                            <% 
+                                                AerodrumMaster source = list.get(0).getSourceId(); 
+                                                out.println(source.getAerodrumName());
+                                            %>
+                                        </td>
 				</tr>
 				<tr>
 					<td>Destination City:</td>
-					<td></td>
+                                        <td>
+                                            <% 
+                                                AerodrumMaster destination = list.get(0).getDestinationId(); 
+                                                out.println(destination.getAerodrumName());
+                                            %>
+                                        </td>
 				</tr>
 				<tr>
 					<td>Date:</td>
@@ -88,11 +121,11 @@
 				</tr>
 				<tr>
 					<td>Arrival Time:</td>
-					<td></td>
+					<td><%= list.get(0).getArrivalTime() %></td>
 				</tr>
 				<tr>
 					<td>Departure Time:</td>
-					<td></td>
+					<td><%= list.get(0).getDepartureTime() %></td>
 				</tr>
 				<tr>
 					<td>No. of seats available:</td>
@@ -102,6 +135,7 @@
 					<td colspan=2><a href="#" style="float:left;"class="button2"><< BACK</a></td>
 				</tr>
 			</table>
+                    <% } %>
 	  </div>
   </section>
 </div>
