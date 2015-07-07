@@ -24,6 +24,10 @@
         <servlet-name>ReservationHandler</servlet-name>
         <servlet-class>user.ReservationHandler</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Logout</servlet-name>
+        <servlet-class>admin.Logout</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/login</url-pattern>
@@ -39,6 +43,10 @@
     <servlet-mapping>
         <servlet-name>ReservationHandler</servlet-name>
         <url-pattern>/reservationhandler</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Logout</servlet-name>
+        <url-pattern>/cpanel/logout</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
