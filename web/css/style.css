@@ -264,9 +264,10 @@ padding: 5px;
 	margin:20px 0px;
 	padding:20px;
 }
-.res td
+.res td 
 {
-	padding: 10px 40px;
+	padding: 10px 16px;
+	font-size:17px;
 }
 .res input[type="radio"]
 {
