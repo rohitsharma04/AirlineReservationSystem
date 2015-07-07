@@ -1,6 +1,7 @@
 package entity;
 
 import java.io.Serializable;
+import java.sql.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -9,6 +10,7 @@ import javax.persistence.ManyToOne;
 
 @Entity
 public class CustomerDetails implements Serializable {
+
     @Id
     @GeneratedValue
     private int pnrNumber;
@@ -19,27 +21,15 @@ public class CustomerDetails implements Serializable {
     private String city;
     private String emailId;
     private String contactNumber;
+    private Date reservationDate;
     @ManyToOne
-    @JoinColumn(name="classId")
+    @JoinColumn(name = "classId")
     private ClassMaster classId;
     @ManyToOne
-    @JoinColumn(name="flightNumber")
+    @JoinColumn(name = "flightNumber")
     private FlightMaster flightNumber;
 
     public CustomerDetails() {
-    }
-
-    public CustomerDetails(int pnrNumber, String passportId, String customerName, int age, String gender, String city, String emailId, String contactNumber, ClassMaster classId, FlightMaster flightNumber) {
-        this.pnrNumber = pnrNumber;
-        this.passportId = passportId;
-        this.customerName = customerName;
-        this.age = age;
-        this.gender = gender;
-        this.city = city;
-        this.emailId = emailId;
-        this.contactNumber = contactNumber;
-        this.classId = classId;
-        this.flightNumber = flightNumber;
     }
 
     public int getPnrNumber() {
@@ -121,5 +111,13 @@ public class CustomerDetails implements Serializable {
     public void setFlightNumber(FlightMaster flightNumber) {
         this.flightNumber = flightNumber;
     }
-    
+
+    public Date getReservationDate() {
+        return reservationDate;
+    }
+
+    public void setReservationDate(Date reservationDate) {
+        this.reservationDate = reservationDate;
+    }
+
 }
