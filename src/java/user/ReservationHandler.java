@@ -40,6 +40,7 @@ public class ReservationHandler extends HttpServlet {
             int age = Date.valueOf(dateOfBirth).getYear();
 
             CustomerDetails customer = new CustomerDetails();
+            customer.setCustomerName(passengerName);
             customer.setPassportId(passportId);
             customer.setAge(age);
             customer.setGender(gender);
@@ -54,7 +55,7 @@ public class ReservationHandler extends HttpServlet {
             session.save(customer);
             transaction.commit();
         } catch (Exception e) {
-            e.printStackTrace();
+            //       e.printStackTrace();
             String message = "Error : " + e.toString();
             request.setAttribute("message", message);
             RequestDispatcher dispatcher = request.getRequestDispatcher("bookings.jsp");
