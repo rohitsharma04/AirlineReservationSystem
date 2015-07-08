@@ -75,7 +75,7 @@
 	  <div class="cancel" > <!--style="display:none;"--> 
 		<div class="up">
 			<span><b>ENTER FLIGHT NO:</b></span>
-			<input type="text" name="flightno" class="border"/>
+                        <input type="text" name="flightno" class="border" pattern="[0-9]+" required oninvalid="setCustomValidity('Please Enter Flight Number')" oninput="setCustomValidity('')"/>
 		</div>
 		<input type="submit" value="CHECK STATUS" style="float:left;" class="button2"/>
 	  </div>

@@ -6,6 +6,7 @@
 <%@page import="org.hibernate.criterion.Restrictions"%>
 <%@page import="entity.CustomerDetails"%>
 <%@page import="org.hibernate.Session"%>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -20,6 +21,7 @@
         <script type="text/javascript" src="js/Myriad_Pro_italic_600.font.js"></script>
         <script type="text/javascript" src="js/Myriad_Pro_italic_400.font.js"></script>
         <script type="text/javascript" src="js/Myriad_Pro_400.font.js"></script>
+        
         <!--[if lt IE 9]>
         <script type="text/javascript" src="js/ie6_script_other.js"></script>
         <script type="text/javascript" src="js/html5.js"></script>
@@ -75,7 +77,9 @@
                     <div class="cancel" > 
                         <div class="up">
                             <span><b>ENTER YOUR PNR NO:</b></span>
-                            <input type="text" name="pnrno" class="border"/>
+                            <input type="text" id="pnrno" name="pnrno" class="border"
+                                   required="required" pattern="[0-9]" required oninvalid="setCustomValidity('Please Enter correct PNR')" oninput="setCustomValidity('')"
+                                   />
                         </div>
                         <input type="submit" value="CHECK STATUS" style="float:left;" class="button2"/>
                     </div>
@@ -153,3 +157,6 @@
         <!-- END PAGE SOURCE -->
     </body>
 </html>
+<%--
+<%@include file="validate.jsp" %>
+--%>

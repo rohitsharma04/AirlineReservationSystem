@@ -105,8 +105,8 @@
                     <tr>
                         <td>Company Name:</td>
                         <td>
-                            <select class="border" name="companyId">
-                                <option selected>SELECT COMPANY</option>
+                            <select class="border" name="companyId" required oninvalid="setCustomValidity('Please Select a Company')" oninput="setCustomValidity('')">
+                                <option selected value="">SELECT COMPANY</option>
                                 <%                                    for (CompanyMaster company : listOfCompanies) {
                                 %>
                                 <option value="<%=company.getCompanyId()%>"><%=company.getCompanyName()%></option>
@@ -117,13 +117,13 @@
                     </tr>
                     <tr>
                         <td>Flight Name:</td>
-                        <td><input type="text" class="border" name="flightName" placeholder="Name of the Flight"/></td>
+                        <td><input type="text" class="border" name="flightName" placeholder="Name of the Flight" pattern="[A-Za-z0-9]+" required oninvalid="setCustomValidity('Please Enter the name of the Flight')" oninput="setCustomValidity('')"/></td>
                     </tr>
                     <tr>
                         <td>Departure Airport:</td>
                         <td>
-                            <select class="border" name="sourceId">
-                                <option selected>SELECT CITY</option>
+                            <select class="border" name="sourceId" required oninvalid="setCustomValidity('Please Choose Source City')" oninput="setCustomValidity('')">
+                                <option value="" selected>SELECT CITY</option>
                                 <%
                                     for (AerodrumMaster aerodrum : listOfAerodrums) {
                                 %>
@@ -136,8 +136,8 @@
                     <tr>
                         <td>Destination Airport:</td>
                         <td>
-                            <select class="border" name="destinationId">
-                                <option selected>SELECT CITY</option>
+                            <select class="border" name="destinationId" required oninvalid="setCustomValidity('Please Choose Destination City')" oninput="setCustomValidity('')">
+                                <option value="" selected>SELECT CITY</option>
                                 <%
                                     for (AerodrumMaster aerodrum : listOfAerodrums) {
                                 %>
@@ -150,8 +150,8 @@
                     <tr>
                         <td>Day(Multiple):</td>
                         <td>
-                            <select class="border" name="dayId" multiple>
-                                <option selected>SELECT DAY</option>
+                            <select class="border" name="dayId" multiple required oninvalid="setCustomValidity('Please Choose Days Flight will fly')" oninput="setCustomValidity('')">
+                                <option selected value="">SELECT DAY</option>
                                 <%
                                     for (DayMaster day : listOfDays) {
                                 %>
@@ -163,11 +163,11 @@
                     </tr>
                     <tr>
                         <td>Departure Time:</td>
-                        <td><input type="time" name="departureTime" class="border" /></td>
+                        <td><input type="time" name="departureTime" class="border" required oninvalid="setCustomValidity('Please Enter Departure Time')" oninput="setCustomValidity('')"/></td>
                     </tr>
                     <tr>
                         <td>Arrival Time:</td>
-                        <td><input type="time" name="arrivalTime" class="border" /></td>
+                        <td><input type="time" name="arrivalTime" class="border" required oninvalid="setCustomValidity('Please Choose Arrival Time')" oninput="setCustomValidity('')" /></td>
                     </tr>
 
                     <!-- Adding Input Boxes for Flight Fares -->
@@ -180,11 +180,11 @@
                     %>
                     <tr>
                         <td><%=c.getClassName()%> Class</td>
-                        <td><input type="text" name="fare<%=c.getClassId()%>" class="border" placeholder="Fare Amount"></td>
+                        <td><input type="text" name="fare<%=c.getClassId()%>" class="border" placeholder="Fare Amount" required oninvalid="setCustomValidity('Please Enter Fare Price')" oninput="setCustomValidity('')"/></td>
                     </tr>
                     <tr>
                         <td></td>
-                        <td><input type="text" name="seats<%=c.getClassId()%>" class="border" placeholder="number of seats"</td>
+                        <td><input type="text" name="seats<%=c.getClassId()%>" class="border" placeholder="number of seats" required oninvalid="setCustomValidity('Please Enter Number of Seats')" oninput="setCustomValidity('')"/></td>
                     </tr>
                     <% }%>
 

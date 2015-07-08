@@ -92,8 +92,8 @@
                             <div class="left" style="width:200px; padding-left:240px; float: left;">
                                 <b>FROM</b>
                                 <div class="clear"></div>
-                                <select class="border" name="from">
-                                    <option value="-1" selected>SELECT CITY</option>
+                                <select class="border" name="from" required oninvalid="setCustomValidity('Please Choose Source City')" oninput="setCustomValidity('')">
+                                    <option value="">--SELECT CITY--</option>
                                     <%
                                         for (AerodrumMaster aerodrum : listOfAerodrums) {
 
@@ -105,8 +105,8 @@
                             </div>
                             <div  class="right"  style="width:200px; margin-left:20px; 	float: left;">
                                 <b>TO</b><div class="clear"></div>
-                                <select class="border" name="to">
-                                    <option value="-1" selected>SELECT CITY</option>
+                                <select class="border" name="to" required oninvalid="setCustomValidity('Please Choose Destination City')" oninput="setCustomValidity('')">
+                                    <option value="">SELECT CITY</option>
                                     <%
                                         for (AerodrumMaster aerodrum : listOfAerodrums) {
 
@@ -120,7 +120,7 @@
                         <div style="clear:both"></div>
                         <div class="date" style="margin-left: 340px;">
                             <b>DATE</b><div class="clear"></div>
-                            <input class="border" type="date" name="date" id="datePicker"/>
+                            <input class="border" type="date" name="date" id="datePicker" required oninvalid="setCustomValidity('Please Enter a correct Date')" oninput="setCustomValidity('')"/>
                         </div>
                         <input type="submit" value="SEARCH FLIGHTS" style=" margin-left:275px; padding-left:95px;padding-right: 95px ; float:left;"class="button2"/>
                     </form>

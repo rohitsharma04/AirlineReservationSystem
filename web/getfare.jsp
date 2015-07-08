@@ -87,8 +87,8 @@
                             <tr>
                                 <td>Departure City:</td>
                                 <td>
-                                    <select class="border" name="sourceId">
-                                        <option value="-1" selected>SELECT CITY</option>
+                                    <select class="border" name="sourceId" required oninvalid="setCustomValidity('Please Choose Source City')" oninput="setCustomValidity('')">
+                                        <option value="">SELECT CITY</option>
                                         <%
                                             for (AerodrumMaster aerodrum : listOfAerodrums) {
                                         %>
@@ -101,8 +101,8 @@
                             <tr>
                                 <td>Destination City:</td>
                                 <td>
-                                    <select class="border" name="destinationId">
-                                        <option value="-1" selected>SELECT CITY</option>
+                                    <select class="border" name="destinationId" required oninvalid="setCustomValidity('Please Choose Destination City')" oninput="setCustomValidity('')">
+                                        <option value="">SELECT CITY</option>
                                         <%
                                             for (AerodrumMaster aerodrum : listOfAerodrums) {
                                         %>
@@ -114,13 +114,14 @@
                             </tr>
                             <tr>
                                 <td>Date:</td>
-                                <td><input type="date" name="date" id="datePicker" class="border" /></td>
+                                <td><input type="date" name="date" id="datePicker" class="border"  required oninvalid="setCustomValidaty('Please select a Date')"/></td>
                             </tr>
 
                             <tr>
                                 <td>Class:</td>
                                 <td>
-                                    <select class="border" name="class" value="---CHOOSE CLASS---">
+                                    <select class="border" name="class" value="---CHOOSE CLASS---" required oninvalid="setCustomValidity('Please Choose Class')" oninput="setCustomValidity('')">
+                                        <option value="">SELECT CLASS </option>
                                         <%
                                             for (ClassMaster c : listOfClasses) {
 

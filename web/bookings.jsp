@@ -103,6 +103,7 @@
                                 <td>
                                     <input 
                                         type="text" name="flightNumber" class="border" 
+                                        required oninvalid="setCustomValidity('Please Enter Correct Flight Number')" oninput="setCustomValidity('')"
                                         <%
                                             String flightNumber = request.getParameter("flightNumber");
                                             if (flightNumber != null) {
@@ -118,7 +119,7 @@
                                     Date:
                                 </td>
                                 <td>
-                                    <input type="date" class="border" name="dateOfJourney" id="datePicker" 
+                                    <input type="date" class="border" name="dateOfJourney" id="datePicker" required oninvalid="setCustomValidity('Please enter your date of Journey')" oninput="setCustomValidity('')"
                                            <%String date = request.getParameter("date");
                                                if (date != null) {%>
                                            value="<%=date%>"
@@ -129,8 +130,8 @@
                             <tr>
                                 <td>Class:</td>
                                 <td>
-                                    <select class="border" name="class" value="---CHOOSE CLASS---">
-                                        <option value="-1">SELECT CLASS</option>
+                                    <select class="border" name="class" value="---CHOOSE CLASS---" required oninvalid="setCustomValidity('Please Choose a Class')" oninput="setCustomValidity('')">
+                                        <option value="" >SELECT CLASS</option>
                                         <%
                                             for (ClassMaster c : listOfClasses) {
                                         %>
@@ -147,34 +148,34 @@
                             </tr>
                             <tr>
                                 <td>Full Name:</td>
-                                <td><input type="text" name="passengerName" class="border" /></td>
+                                <td><input type="text" name="passengerName" class="border" required pattern="[A-Za-z\s]+" oninvalid="setCustomValidity('Please Enter Your Name Correctly')" oninput="setCustomValidity('')"/></td>
                             </tr>
                             <tr>
                                 <td>Date Of Birth:</td>
                                 <td>
-                                    <input  class="border" name="dateOfBirth" type="date" id="datePicker"/>
+                                    <input  class="border" name="dateOfBirth" type="date" id="datePicker" required oninvalid="setCustomValidity('Please Enter your Birthdate')" oninput="setCustomValidity('')"/>
                                 </td>
                             </tr>
                             <tr>
                                 <td>Gender:</td>
-                                <td><input type="radio" name="gender" value="female" />F
-                                    <input type="radio" name="gender" value="male"  />M</td>
+                                <td><input type="radio" name="gender" value="female" required />F
+                                    <input type="radio" name="gender" value="male" required />M</td>
                             </tr>
                             <tr>
                                 <td>City:</td>
-                                <td><input type="text" name="city" class="border" /></td>
+                                <td><input type="text" name="city" class="border" required pattern="[A-Za-z\s]+" oninvalid="setCustomValidity('Please Enter the name of your city')" oninput="setCustomValidity('')"/></td>
                             </tr>
                             <tr>
                                 <td>Passport ID:</td>
-                                <td><input type="text" name="passportId" class="border" /></td>
+                                <td><input type="text" name="passportId" class="border" pattern="[A-Z0-9]+" required oninvalid="setCustomValidity('Enter Your Passport Number')" oninput="setCustomValidity('')"/></td>
                             </tr>
                             <tr>
                                 <td>Email ID:</td>
-                                <td><input type="email" name="email" class="border" /></td>
+                                <td><input type="email" name="email" class="border" required oninvalid="setCustomValidity('Please Enter Valid Email')" oninput="setCustomValidity('')"/></td>
                             </tr>
                             <tr>
                                 <td>Contact No:</td>
-                                <td><input type="text" name="contactNumber" class="border"  /></td>
+                                <td><input type="text" name="contactNumber" class="border" pattern="[0-9]{10}" required oninvalid="setCustomValidity('Please Enter Your 10 digit Mobile Number')" oninput="setCustomValidity('')" /></td>
                             </tr>
                             <tr>
                                 <td colspan=2><input type="submit" value = "BOOK NOW" style="float:left;"class="button2"/></td>

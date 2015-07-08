@@ -34,12 +34,12 @@
                         <table border="0" cellpadding="0" cellspacing="0">
                             <tr>
                                 <th>Username</th>
-                                <td><input type="text"  class="login-inp" name="username"/></td>
+                                <td><input type="text"  class="login-inp" name="username" required oninvalid="setCustomValidity('Please Enter Your Username')" oninput="setCustomValidity('')"/></td>
                             </tr>
                             <tr>
                                 <th>Password</th>
                                 <td>
-                                    <input type="password" onfocus="this.value = ''" class="login-inp" name="password" />
+                                    <input type="password" onfocus="this.value = ''" class="login-inp" name="password" required oninvalid="setCustomValidity('Please Enter Your Password')" oninput="setCustomValidity('')" />
                                 </td>
                             </tr>
                             <tr>

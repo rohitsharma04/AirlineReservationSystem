@@ -70,7 +70,7 @@
 	  <div class="cancel" > <!--style="display:none;"--> 
 		<div class="up">
 			<span><b>ENTER YOUR PNR NO:</b></span>
-			<input type="text" name="pnrno" class="border"/>
+			<input type="text" name="pnrno" class="border" required pattern="[0-9]+" oninvalid="setCustomValidity('Please Enter Your PNR Number')" oninput="setCustomValidity('')"/>
 		</div>
 		<input type="submit" value="SUBMIT" style="float:left;" class="button2"/>
 	  </div>
