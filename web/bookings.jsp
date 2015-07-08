@@ -1,4 +1,6 @@
-<%@page import="entity.FlightFareMap"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
++<%@page import="entity.FlightFareMap"%>
 <%@page import="entity.FlightMaster"%>
 <%@page import="java.sql.Date"%>
 <%@page import="entity.ClassMaster"%>
@@ -12,8 +14,8 @@
 <%@page import="org.hibernate.Session"%>
 <%
     Session s = HibernateDAOLayer.getSession();
-    Criteria c4 = s.createCriteria(ClassMaster.class);
-    List<ClassMaster> listOfClasses = c4.list();
+    Criteria c = s.createCriteria(ClassMaster.class);
+    pageContext.setAttribute("listOfClasses", c.list());
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -73,26 +75,16 @@
         <div class="main">
             <section id="content">
                 <div class="book">
-                    <a href="#" style="float:left;"class="button1 current">RESERVATION OF TICKETS</a>
+                    <a href="bookings.jsp" style="float:left;"class="button1 current">RESERVATION OF TICKETS</a>
                     <a href="cancel.jsp" style="float:left;"class="button1">CANCELLATION OF TICKETS</a>
                 </div>
+                <%-- Printing Message from the addflighthandler --%>
+                <c:if test="${requestScope.message != null}">
+                    <h3 style="color: red;">${requestScope.message}</h3>
+                </c:if>
                 <div class="res">
                     <form method="POST" action="reservationhandler">
                         <table>
-
-                            <%-- Printing Message from the addflighthandler --%>
-                            <%
-                                String message = (String) request.getAttribute("message");
-                                if (message != null)
-                                {
-                            %>
-                            <tr>
-                                <td colspan="2">
-                                    <h3 style="color: red;"><%=message%></h3>
-                                </td>
-                            </tr>
-                            <%}%>
-
                             <tr>
                                 <td colspan="2">
                                     <h2>Flight Details</h2>
@@ -101,30 +93,22 @@
                             <tr>
                                 <td>Flight Number:</td>
                                 <td>
-                                    <input 
-                                        type="text" name="flightNumber" class="border" 
-                                        required oninvalid="setCustomValidity('Please Enter Correct Flight Number')" oninput="setCustomValidity('')"
-                                        <%
-                                            String flightNumber = request.getParameter("flightNumber");
-                                            if (flightNumber != null) {
-                                        %>
-                                        value ="<%=flightNumber%>"
-                                        <% }%>
-                                        />
-                                </td>
-                            </tr>
+                                    <input type="text" name="flightNumber" class="border" 
+                                           required oninvalid="setCustomValidity('Please Enter Correct Flight Number')" oninput="setCustomValidity('')"
+                                           value ="${param.flightNumber}" 
+                                           <c:if test="${param.flightNumber != null}">readonly</c:if>
+                                               />
+                                    </td>
+                                </tr>
 
-                            <tr>
-                                <td>
-                                    Date:
-                                </td>
-                                <td>
-                                    <input type="date" class="border" name="dateOfJourney" id="datePicker" required oninvalid="setCustomValidity('Please enter your date of Journey')" oninput="setCustomValidity('')"
-                                           <%String date = request.getParameter("date");
-                                               if (date != null) {%>
-                                           value="<%=date%>"
-                                           <% }%> 
-                                           />
+                                <tr>
+                                    <td>
+                                        Date:
+                                    </td>
+                                    <td>
+                                        <input type="date" class="border" name="dateOfJourney" id="datePicker" required oninvalid="setCustomValidity('Please enter your date of Journey')" oninput="setCustomValidity('')"
+                                               value="${param.date}"
+                                        />
                                 </td>
                             </tr>
                             <tr>
@@ -132,11 +116,9 @@
                                 <td>
                                     <select class="border" name="class" value="---CHOOSE CLASS---" required oninvalid="setCustomValidity('Please Choose a Class')" oninput="setCustomValidity('')">
                                         <option value="" >SELECT CLASS</option>
-                                        <%
-                                            for (ClassMaster c : listOfClasses) {
-                                        %>
-                                        <option value="<%=c.getClassId()%>"><%=c.getClassName()%></option>
-                                        <%}%>
+                                        <c:forEach var="c" items="${listOfClasses}">
+                                            <option value="${c.getClassId()}">${c.getClassName()}></option>
+                                        </c:forEach>
                                     </select>
                                 </td>
                             </tr>
