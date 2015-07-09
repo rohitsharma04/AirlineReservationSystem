@@ -32,6 +32,10 @@
         <servlet-name>CancellationHandler</servlet-name>
         <servlet-class>user.CancellationHandler</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ContactHandler</servlet-name>
+        <servlet-class>user.ContactHandler</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/login</url-pattern>
@@ -55,6 +59,10 @@
     <servlet-mapping>
         <servlet-name>CancellationHandler</servlet-name>
         <url-pattern>/cancellationhandler</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ContactHandler</servlet-name>
+        <url-pattern>/contacthandler</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
