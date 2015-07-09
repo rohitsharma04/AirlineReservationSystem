@@ -1,6 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-+<%@page import="entity.FlightFareMap"%>
+<%@page import="entity.FlightFareMap"%>
 <%@page import="entity.FlightMaster"%>
 <%@page import="java.sql.Date"%>
 <%@page import="entity.ClassMaster"%>
@@ -97,7 +96,7 @@
                                     <input type="text" name="flightNumber" class="border" 
                                            required oninvalid="setCustomValidity('Please Enter Correct Flight Number')" oninput="setCustomValidity('')"
                                            value ="${param.flightNumber}" 
-                                           <c:if test="${param.flightNumber != null}">readonly</c:if>
+                                           <c:if test="${param.flightNumber != null}">readonly="true"</c:if>
                                                />
                                     </td>
                                 </tr>
@@ -109,14 +108,15 @@
                                     <td>
                                         <input type="date" class="border" name="dateOfJourney" id="datePicker" required oninvalid="setCustomValidity('Please enter your date of Journey')" oninput="setCustomValidity('')"
                                                value="${param.date}"
-                                        />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Class:</td>
-                                <td>
-                                    <select class="border" name="class" value="---CHOOSE CLASS---" required oninvalid="setCustomValidity('Please Choose a Class')" oninput="setCustomValidity('')">
-                                        <option value="" >SELECT CLASS</option>
+                                        <c:if test="${param.date != null}">readonly="true"</c:if>
+                                            />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Class:</td>
+                                    <td>
+                                        <select class="border" name="class" value="---CHOOSE CLASS---" required oninvalid="setCustomValidity('Please Choose a Class')" oninput="setCustomValidity('')">
+                                            <option value="" >SELECT CLASS</option>
                                         <c:forEach var="c" items="${listOfClasses}">
                                             <option value="${c.getClassId()}">${c.getClassName()}></option>
                                         </c:forEach>
