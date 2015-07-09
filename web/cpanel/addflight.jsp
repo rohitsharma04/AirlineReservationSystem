@@ -29,7 +29,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>ADMIN PANEL</title>
+        <title>ADMIN PANEL | Add Flight</title>
+        <link rel="shortcut icon" href="../favicon.ico"/>
         <link rel="stylesheet" href="css/screen.css" type="text/css" media="screen" title="default" />
         <script src="js/jquery/jquery-1.4.1.min.js" type="text/javascript"></script> 
         <script src="js/jquery/custom_jquery.js" type="text/javascript"></script>

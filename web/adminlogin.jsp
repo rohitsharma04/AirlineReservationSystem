@@ -4,6 +4,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <title>Admin Login</title>
+        <link rel="shortcut icon" href="favicon.ico"/>
         <link rel="stylesheet" href="admin/css/screen.css" type="text/css" media="screen" title="default" />
         <!--  jquery core -->
         <script src="admin/js/jquery/jquery-1.4.1.min.js" type="text/javascript"></script>
