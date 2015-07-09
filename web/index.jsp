@@ -92,7 +92,7 @@
                                 <b>FROM</b>
                                 <div class="clear"></div>
                                 <select class="border" name="from" required oninvalid="setCustomValidity('Please Choose Source City')" oninput="setCustomValidity('')">
-                                    <option value="">--SELECT CITY--</option>
+                                    <option value="">SELECT CITY</option>
                                     <c:forEach var="aerodrum" items="${listOfAerodrums}">
                                         <option value="${aerodrum.getAerodrumId()}">${aerodrum.getAerodrumName()}</option>
                                     </c:forEach>
@@ -179,9 +179,9 @@
                             </div>
                         </c:if>
                     </c:forEach>
-                </c:if>
-                <c:if test="${isFlightFound != 'true'}">
-                    <h3 style="font-size:23px;">No Flights Found</h3>
+                    <c:if test="${isFlightFound != 'true'}">
+                        <h3 style="font-size:23px;">No Flights Found</h3>
+                    </c:if>
                 </c:if>
             </section>
         </div>
