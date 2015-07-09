@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import="entity.FlightFareMap"%>
 <%@page import="entity.FlightMaster"%>
 <%@page import="java.sql.Date"%>
@@ -12,16 +13,12 @@
 <%@page import="org.hibernate.Session"%>
 <%
     Session s = HibernateDAOLayer.getSession();
-
     //Getting Aerodrums
-    Criteria c2 = s.createCriteria(AerodrumMaster.class);
-    List<AerodrumMaster> listOfAerodrums = c2.list();
-    //Getting days from DayMaster
-    Criteria c3 = s.createCriteria(DayMaster.class);
-    List<DayMaster> listOfDays = c3.list();
+    Criteria c1 = s.createCriteria(AerodrumMaster.class);
+    pageContext.setAttribute("listOfAerodrums", c1.list());
     //Getting Class from ClassMaster
-    Criteria c4 = s.createCriteria(ClassMaster.class);
-    List<ClassMaster> listOfClasses = c4.list();
+    Criteria c2 = s.createCriteria(ClassMaster.class);
+    pageContext.setAttribute("listOfClasses", c2.list());
 %>
 
 <!DOCTYPE html>
@@ -89,12 +86,9 @@
                                 <td>
                                     <select class="border" name="sourceId" required oninvalid="setCustomValidity('Please Choose Source City')" oninput="setCustomValidity('')">
                                         <option value="">SELECT CITY</option>
-                                        <%
-                                            for (AerodrumMaster aerodrum : listOfAerodrums) {
-                                        %>
-                                        <option value="<%=aerodrum.getAerodrumId()%>"><%=aerodrum.getCity()%></option>
-                                        <% }
-                                        %>
+                                        <c:forEach var="aerodrum" items="${listOfAerodrums}">
+                                            <option value="${aerodrum.getAerodrumId()}">${aerodrum.getCity()}</option>
+                                        </c:forEach>
                                     </select>
                                 </td>
                             </tr>
@@ -103,12 +97,9 @@
                                 <td>
                                     <select class="border" name="destinationId" required oninvalid="setCustomValidity('Please Choose Destination City')" oninput="setCustomValidity('')">
                                         <option value="">SELECT CITY</option>
-                                        <%
-                                            for (AerodrumMaster aerodrum : listOfAerodrums) {
-                                        %>
-                                        <option value="<%=aerodrum.getAerodrumId()%>"><%=aerodrum.getCity()%></option>
-                                        <% }
-                                        %>
+                                        <c:forEach var="aerodrum" items="${listOfAerodrums}">
+                                            <option value="${aerodrum.getAerodrumId()}">${aerodrum.getCity()}</option>
+                                        </c:forEach>
                                     </select>
                                 </td>
                             </tr>
@@ -120,16 +111,11 @@
                             <tr>
                                 <td>Class:</td>
                                 <td>
-                                    <select class="border" name="class" value="---CHOOSE CLASS---" required oninvalid="setCustomValidity('Please Choose Class')" oninput="setCustomValidity('')">
+                                    <select class="border" name="classId" value="---CHOOSE CLASS---" required oninvalid="setCustomValidity('Please Choose Class')" oninput="setCustomValidity('')">
                                         <option value="">SELECT CLASS </option>
-                                        <%
-                                            for (ClassMaster c : listOfClasses) {
-
-                                        %>
-                                        <option value="<%=c.getClassId()%>"><%=c.getClassName() + " Class"%></option>
-                                        <%
-                                            }
-                                        %>
+                                        <c:forEach var="c" items="${listOfClasses}">
+                                            <option value="${c.getClassId()}">${c.getClassName()} Class</option>
+                                        </c:forEach>
                                     </select>
                                 </td>
                             </tr>
@@ -141,79 +127,64 @@
                     </form>
                 </div>
                 <%-- Printing Flight Details if found --%>
+                <c:if test="${param.sourceId != null && param.destinationId != null && param.classId != null && param.date != null}">
                     <%
-                        //When Search is entered
-                        String sourceId = request.getParameter("sourceId");
-                        String destinationId = request.getParameter("destinationId");
-                        String date = request.getParameter("date");
-                        String classId = request.getParameter("class");
-                        //Found the souce and checking if there is any flight which will go from source to destination on the said day
-                        Date d;
-                        if (date != null) {
-                            d = Date.valueOf(date);
-                            DayMaster day = (DayMaster) s.get(DayMaster.class, d.getDay() + 1);
-                            //out.println("<h1>" + day.getDayName() + "</h1>");
-                            List<FlightMaster> flights = day.getFlights();
-                            Boolean isFlightFound = false;
-                            for (FlightMaster flight : flights) {
-                                if (flight.getSourceId().getAerodrumId() == Integer.parseInt(sourceId)
-                                        && flight.getDestinationId().getAerodrumId() == Integer.parseInt(destinationId)) {
-                                    isFlightFound = true;
-
-                                    //out.println("Flight Found");
+                        DayMaster day = (DayMaster) s.get(DayMaster.class, Date.valueOf(request.getParameter("date")).getDay() + 1);
+                        pageContext.setAttribute("flights", day.getFlights());
                     %>
-                <div class="res"><!--style="display:none;"-->   
-                    <table>
-                        <tr>
-                            <td>
-                                <h2>Fare Details</h2>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Flight Number:</td>
-                            <td><%=flight.getFlightNumber()%></td>
-                        </tr>
-                        <tr>
-                            <td>Departure City:</td>
-                            <td><%=flight.getSourceId().getAerodrumName()%></td>
-                        </tr>
-                        <tr>
-                            <td>Destination City:</td>
-                            <td><%=flight.getDestinationId().getAerodrumName()%></td>
-                        </tr>
-                        <tr>
-                            <td>Date:</td>
-                            <td><%=d.toString()%></td>
-                        </tr>
-                        <tr>
-                            <td>Departure Time:</td>
-                            <td><%=flight.getDepartureTime().toString()%></td>
-                        </tr>
-                        <tr>
-                            <td>Arrival Time:</td>
-                            <td><%=flight.getArrivalTime().toString()%></td>
-                        </tr>
-                        <tr>
-                            <td>Class:</td>
-                            <td><%=flight.getFare().get(Integer.parseInt(classId) - 1).getClassId().getClassName()%></td>
-                        </tr>
-                        <tr>
-                            <td><H3 style="font-size:23px; ">FARE : <%=flight.getFare().get(Integer.parseInt(classId) - 1).getFare()%> INR</H3></td>
-                        </tr>
-                        <tr>
-                            <td colspan=2><a href="#" style="float:left;"class="button2"><< BACK</a></td>
-                        </tr>
-                    </table>
-                </div>
-                <%                                                }
-                    }
-                    if (!isFlightFound) {
-                %>
-                <h3 style="font-size:23px;">No Flights Found</h3>
-                <%
-                        }
-                    }
-                %>
+                    <c:forEach var="flight" items="${flights}">
+                        <c:if test="${flight.getSourceId().getAerodrumId() == Integer.parseInt(param.sourceId)
+                                      && flight.getDestinationId().getAerodrumId() == Integer.parseInt(param.destinationId)}">
+                            <c:set scope="page" var="isFlightFound" value="true"/>
+                            <div class="res"><!--style="display:none;"-->   
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <h2>Fare Details</h2>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Flight Number:</td>
+                                        <td>${flight.getFlightNumber()}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Departure City:</td>
+                                        <td>${flight.getSourceId().getAerodrumName()}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Destination City:</td>
+                                        <td>${flight.getDestinationId().getAerodrumName()}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Date:</td>
+                                        <td>${param.date}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Departure Time:</td>
+                                        <td>${flight.getDepartureTime().toString()}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Arrival Time:</td>
+                                        <td>${flight.getArrivalTime().toString()}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Class:</td>
+                                        <td>${flight.getFare().get(Integer.parseInt(param.classId) - 1).getClassId().getClassName()}</td>
+                                    </tr>
+                                    <tr>
+                                        <td><H3 style="font-size:23px; ">FARE : ${flight.getFare().get(Integer.parseInt(param.classId) - 1).getFare()} INR</H3></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan=2><a href="#" style="float:left;"class="button2"><< BACK</a></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </c:if>
+                    </c:forEach>
+                    <c:if test="${isFlightFound != 'true'}">
+                        <h3 style="font-size:23px;">No Flights Found</h3>
+                    </c:if>
+                </c:if>
             </section>
         </div>
         <div class="body2">
