@@ -22,6 +22,18 @@
                     <file>${libs.jstl.classpath}</file>
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
+                <library dirs="200">
+                    <file>${file.reference.joda-time-2.8.1-javadoc.jar}</file>
+                </library>
+                <library dirs="200">
+                    <file>${file.reference.joda-time-2.8.1-no-tzdb.jar}</file>
+                </library>
+                <library dirs="200">
+                    <file>${file.reference.joda-time-2.8.1-sources.jar}</file>
+                </library>
+                <library dirs="200">
+                    <file>${file.reference.joda-time-2.8.1.jar}</file>
+                </library>
             </web-module-libraries>
             <web-module-additional-libraries/>
             <source-roots>
