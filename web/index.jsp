@@ -127,55 +127,28 @@
                         <c:if test="${flight.getSourceId().getAerodrumId() == Integer.parseInt(param.from)
                                       && flight.getDestinationId().getAerodrumId() == Integer.parseInt(param.to)}">
                             <c:set scope="page" var="isFlightFound" value="true"/>
-                            <div class="res"><!--style="display:none;"-->
-                                <form>
-                                    <table>
-                                        <tr>
-                                            <td>
-                                                Flight Number:
-                                            </td>
-                                            <td>
-                                                ${flight.getFlightNumber()}
-                                            </td>
-                                        </tr>
+                            <div class="res1 border">
+                                <div class="part1">
+                                    Flight Number: ${flight.getFlightNumber()}
+                                </div>
+                                <div class="part1">
+                                    Flight Name: ${flight.getFlightName()}
+                                </div>   
+                                <div class="clear"></div>
+                                <div class="part2"><div style="padding:15px 0px; align:center;">${flight.getSourceId().getAerodrumName()}</div>
+                                    <b> ${param.date}, ${flight.getDepartureTime()}</b></div>
+                                <div class="part3">&#8594;</div>
+                                <div class="part2"><div style="padding:15px 0px; align:center;">${flight.getDestinationId().getAerodrumName()}</div>
+                                    <b> ${param.date}, ${flight.getArrivalTime()}</b></div>
+                                <div class="clear"></div>
 
-                                        <tr>
-                                            <td>
-                                                Flight Name:
-                                            </td>
-                                            <td>
-                                                ${flight.getFlightName()}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td><b>Departure City:</b></td>
-                                            <td>${flight.getSourceId().getAerodrumName()}</td>
-                                            <td><b>Destination City:</b></td>
-                                            <td>${flight.getDestinationId().getAerodrumName()}</td>
-                                        </tr>
-                                        <tr>
-                                            <td><b>Date:</b></td>
-                                            <td>${param.date}</td>
-                                        </tr>
-                                        <tr>
-                                            <td><b>Departure Time:</b></td>
-                                            <td>${flight.getDepartureTime()}</td>
-                                            <td><b>Arrival Time:</b></td>
-                                            <td>${flight.getArrivalTime()}</td>
-                                        </tr>
-
-                                        <tr>
-                                            <c:forEach var="fare" items="${flight.getFare()}">
-                                                <td><b>${fare.getClassId().getClassName()} Class:</b></td>
-                                                <td>${fare.getFare()} INR</td>
-                                            </c:forEach>
-                                        </tr>
-
-                                        <tr>
-                                            <td colspan=2><a href="bookings.jsp?flightNumber=${flight.getFlightNumber()}&date=${param.date}" style="float:left;"class="button2">BOOK THIS >></a></td>
-                                        </tr>
-                                    </table>
-                                </form>
+                                <c:forEach var="fare" items="${flight.getFare()}">
+                                    <div class="fareinfo">
+                                        ${fare.getClassId().getClassName()} Class:
+                                        &#x20B9; ${fare.getFare()}
+                                    </div>
+                                </c:forEach>
+                                <a href="bookings.jsp?flightNumber=${flight.getFlightNumber()}&date=${param.date}" style="float:left;" class="button2">BOOK THIS >></a>
                             </div>
                         </c:if>
                     </c:forEach>
@@ -183,6 +156,13 @@
                         <h3 style="font-size:23px;">No Flights Found</h3>
                     </c:if>
                 </c:if>
+                <table class="page_here" >
+                    <tr>
+                        <td><a href="" class="lpage"></a></td>
+                        <td class="npage">Page 1 / 15</td>
+                        <td><a href="" class="rpage"></a></td>
+                    </tr>
+                </table>
             </section>
         </div>
         <div class="body2">

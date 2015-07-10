@@ -1,5 +1,30 @@
+.lpage
+{
+    background: url(../images/paging_left.gif) no-repeat;
+	display: block;
+	float: left;
+	height: 24px;
+	width: 24px;
+        
+}
 
-
+.rpage
+{
+   background: url(../images/paging_right.gif) no-repeat;
+	display: block;
+	float: left;
+	height: 24px;
+	width: 24px;
+}
+.page_here td
+{
+    padding:5px;
+}
+.page_here
+{
+    float: right;
+    margin:5px 10px;
+}
 .slider-wrapper { 
 	width: 100%; 
 	margin: 0px auto;
@@ -260,6 +285,7 @@ padding: 5px;
 }
 .res 
 {
+        
 	border: 1px solid grey;
 	margin:20px 0px;
 	padding:20px;
@@ -276,6 +302,39 @@ padding: 5px;
 .res input[type="text"], select,  input[type="date"]
 {
 	width:200px;
+}
+.res1
+{
+    margin:10px 0px;
+    padding: 15px 30px 60px 30px;
+    font-size:18px;
+}
+.part1
+{
+    padding:0px 18px;
+    float:left;
+    font-size:12px;
+}
+.part2
+{
+    align:center;
+    float:left;
+    padding:0px 70px 15px 70px;
+}
+.clear
+{
+    clear:both;
+}
+.part3
+{
+    align:center;
+    float:left;
+    padding:15px 70px;
+}
+.fareinfo
+{
+    float:left;
+    padding:8px 37px;
 }
 #content {
 	width:100%;
