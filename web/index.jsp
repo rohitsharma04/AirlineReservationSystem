@@ -23,6 +23,12 @@
         <title>AirLines</title>
         <meta charset="utf-8">
         <link rel="shortcut icon" href="favicon.ico"/> 
+        <!-- SWeet Alert -->
+        <script src="dist/jquery-2.1.3.min.js"></script>
+        <script src="dist/sweetalert-dev.js"></script>
+        <link rel="stylesheet" href="dist/sweetalert.css">
+        <!--.......................-->
+        <!--             -->
         <link rel="stylesheet" href="css/reset.css" type="text/css" media="all">
         <link rel="stylesheet" href="css/layout.css" type="text/css" media="all">
         <link rel="stylesheet" href="css/style.css" type="text/css" media="all">
@@ -84,7 +90,7 @@
         </div>
         <div class="main">
             <section id="content" >
-                <h2 >Airline Reservation System</h2>
+                <h2>Airline Reservation System</h2>
                 <div class="search">
                     <form method="get" action="index.jsp">
                         <div>
