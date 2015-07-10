@@ -11,7 +11,7 @@
     Session s = HibernateDAOLayer.getSession();
     Criteria c1 = s.createCriteria(FlightMaster.class);
     c1.setProjection(Projections.rowCount());
-    pageSize = 1;
+    pageSize = 5;
     numberOfRows = Integer.parseInt(c1.list().get(0).toString());
     if (request.getParameter("pageNumber") == null) {
         pageNumber = 1;

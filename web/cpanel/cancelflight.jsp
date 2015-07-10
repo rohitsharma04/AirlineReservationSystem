@@ -11,7 +11,7 @@
     Session s = HibernateDAOLayer.getSession();
     Criteria c1 = s.createCriteria(FlightMaster.class);
     c1.setProjection(Projections.rowCount());
-    pageSize = 1;
+    pageSize = 5;
     numberOfRows = Integer.parseInt(c1.list().get(0).toString());
     if (request.getParameter("pageNumber") == null) {
         pageNumber = 1;
@@ -129,7 +129,7 @@
                                 </div>
                             </li>
                         </ul>
-  
+
                     </div>
                 </div>
             </div>
@@ -173,7 +173,10 @@
                                 <td>${flight.getDestinationId().getAerodrumName()}</td>
                                 <td>${flight.getDepartureTime().toString()}</td>
                                 <td>${flight.getArrivalTime().toString()}</td>
-                                <td><a href="cancelflighthandler?flightId=${flight.getFlightNumber()}"><b>CLICK HERE TO CANCEL</b></a></td>
+                                <td><a href="cancelflighthandler?flightId=${flight.getFlightNumber()}" class="warning cancel"
+                                       onclick="return confirm('Are you sure to delete ?')">
+                                        <b>CLICK HERE TO CANCEL</b></a>
+                                </td>
                             </tr>
                         </c:forEach>
                 </table>
