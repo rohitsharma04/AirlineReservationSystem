@@ -37,7 +37,7 @@ public class ReservationHandler extends HttpServlet {
             FlightMaster flight = new FlightMaster();
             flight.setFlightNumber(Integer.parseInt(flightNumber));
 
-            int age = Date.valueOf(dateOfBirth).getYear();
+            int age = (new java.util.Date()).getYear() - Date.valueOf(dateOfBirth).getYear();
 
             CustomerDetails customer = new CustomerDetails();
             customer.setCustomerName(passengerName);
