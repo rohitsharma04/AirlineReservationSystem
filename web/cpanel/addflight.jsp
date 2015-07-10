@@ -67,12 +67,6 @@
                                 </div>
                             </li>
                         </ul>
-                        <div class="nav-divider">&nbsp;</div>					
-                        <ul class="select">
-                            <li>
-                                <a href="#"><b>Aerodrum Details</b></a>
-                            </li>
-                        </ul>
                     </div>
                 </div>
             </div>
@@ -118,7 +112,7 @@
                     </tr>
                     <tr>
                         <td>Flight Name:</td>
-                        <td><input type="text" class="border" name="flightName" placeholder="Name of the Flight" pattern="[A-Za-z0-9]+" required oninvalid="setCustomValidity('Please Enter the name of the Flight')" oninput="setCustomValidity('')"/></td>
+                        <td><input type="text" class="border" name="flightName" placeholder="Name of the Flight" pattern="[A-Za-z0-9\s]+" required oninvalid="setCustomValidity('Please Enter the name of the Flight')" oninput="setCustomValidity('')"/></td>
                     </tr>
                     <tr>
                         <td>Departure Airport:</td>

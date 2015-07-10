@@ -118,7 +118,7 @@
                                         <select class="border" name="class" value="---CHOOSE CLASS---" required oninvalid="setCustomValidity('Please Choose a Class')" oninput="setCustomValidity('')">
                                             <option value="" >SELECT CLASS</option>
                                         <c:forEach var="c" items="${listOfClasses}">
-                                            <option value="${c.getClassId()}">${c.getClassName()}></option>
+                                            <option value="${c.getClassId()}">${c.getClassName()}</option>
                                         </c:forEach>
                                     </select>
                                 </td>
