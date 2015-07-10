@@ -8,7 +8,7 @@
 <%
     Session s = HibernateDAOLayer.getSession();
     Criteria c = s.createCriteria(FlightMaster.class);
-    List<FlightMaster> listOfFlights = c.list();
+    pageContext.setAttribute("listOfFlights", c.list());
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -139,48 +139,29 @@
                         <th class="table-header-repeat line-left"><a href="">Departure Time</a></th>
                         <th class="table-header-repeat line-left"><a href="">Arrival Time</a></th>
                     </tr>
-                    <%
-                        for (int i = 0; i < listOfFlights.size(); i++) {
-
-                            if (i % 2 != 0) {
-                    %>
-                    <tr class="alternate-row">
-                        <%} else { %>
-                        <tr>
-                            <%
-                                }
-                            %>
-
-                            <td><%=listOfFlights.get(i).getFlightNumber()%></td>
-                            <td><%=listOfFlights.get(i).getFlightName()%></td>
-                            <td><%=listOfFlights.get(i).getCompanyId().getCompanyName()%></td>
-                            <td><%=listOfFlights.get(i).getSourceId().getAerodrumName()%></td>
-                            <td><%=listOfFlights.get(i).getDestinationId().getAerodrumName()%></td>
-                            <td><%=listOfFlights.get(i).getDepartureTime().toString()%></td>
-                            <td><%=listOfFlights.get(i).getArrivalTime().toString()%></td>
-                        </tr>
-                        <%
-                            }
-
-                        %>
-
+                    <c:forEach var="flight" items="${listOfFlights}" varStatus="i">
+                        <c:if test="${(i.index mod 2) == 0}">
+                            <tr class="alternate-row">
+                            </c:if>
+                            <c:if test="${(i.index mod 2) != 0}">
+                                <tr>
+                                </c:if>
+                                <td>${flight.getFlightNumber()}</td>
+                                <td>${flight.getFlightName()}</td>
+                                <td>${flight.getCompanyId().getCompanyName()}</td>
+                                <td>${flight.getSourceId().getAerodrumName()}</td>
+                                <td>${flight.getDestinationId().getAerodrumName()}</td>
+                                <td>${flight.getDepartureTime().toString()}</td>
+                                <td>${flight.getArrivalTime().toString()}</td>
+                            </tr>
+                        </c:forEach>
                 </table>
                 <table border="0" cellpadding="0" cellspacing="0" id="paging-table">
                     <tr>
                         <td>
-                            <a href="" class="page-far-left"></a>
                             <a href="" class="page-left"></a>
                             <div id="page-info">Page <strong>1</strong> / 15</div>
                             <a href="" class="page-right"></a>
-                            <a href="" class="page-far-right"></a>
-                        </td>
-                        <td>
-                            <select  class="styledselect_pages">
-                                <option value="">Number of rows</option>
-                                <option value="">1</option>
-                                <option value="">2</option>
-                                <option value="">3</option>
-                            </select>
                         </td>
                     </tr>
                 </table>

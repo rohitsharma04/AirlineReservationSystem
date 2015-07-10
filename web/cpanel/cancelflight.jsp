@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import="entity.CompanyMaster"%>
 <%@page import="java.util.List"%>
 <%@page import="org.hibernate.Criteria"%>
@@ -7,7 +8,7 @@
 <%
     Session s = HibernateDAOLayer.getSession();
     Criteria c = s.createCriteria(FlightMaster.class);
-    List<FlightMaster> listOfFlights = c.list();
+    pageContext.setAttribute("listOfFlights", c.list());
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -128,19 +129,12 @@
                 <div id="page-heading">
                     <h2>Cancel Flight</h2>
                 </div>
-
                 <%-- Adding Successful or Unsuccessful Flight Cancellation Message --%>
-                <%
-                    String message = (String) request.getAttribute("message");
-                    if (message != null) {
-                %>
+                <c:if test="${requestScope.message != null}">
                 <div id="page-heading">
-                    <h3><%=message %></h3>
+                    <h3>${requestScope.message}</h3>
                 </div>
-                <% 
-                    }
-                %>
-
+                </c:if>
                 <table border="0" width="100%" cellpadding="0" cellspacing="0" id="product-table">
                     <tr>
                         <th class="table-header-repeat line-left minwidth-1"><a href="">Flight No.</a>	</th>
@@ -152,31 +146,24 @@
                         <th class="table-header-repeat line-left"><a href="">Arrival Time</a></th>
                         <th class="table-header-options line-left"><a href=""></a></th>
                     </tr>
-                    <%
-                        for (int i = 0; i < listOfFlights.size(); i++) {
-
-                            if (i % 2 != 0) {
-                    %>
-                    <tr class="alternate-row">
-                        <%} else { %>
-                        <tr>
-                            <%
-                                }
-                            %>
-
-                            <td><%=listOfFlights.get(i).getFlightNumber()%></td>
-                            <td><%=listOfFlights.get(i).getFlightName()%></td>
-                            <td><%=listOfFlights.get(i).getCompanyId().getCompanyName()%></td>
-                            <td><%=listOfFlights.get(i).getSourceId().getAerodrumName()%></td>
-                            <td><%=listOfFlights.get(i).getDestinationId().getAerodrumName()%></td>
-                            <td><%=listOfFlights.get(i).getDepartureTime().toString()%></td>
-                            <td><%=listOfFlights.get(i).getArrivalTime().toString()%></td>
-                            <td><a href="cancelflighthandler?flightId=<%=listOfFlights.get(i).getFlightNumber()%>"><b>CLICK HERE TO CANCEL</b></a></td>
-                        </tr>
-                        <%
-                            }
-
-                        %>
+                    
+                    <c:forEach var="flight" items="${listOfFlights}" varStatus="i">
+                        <c:if test="${(i.index mod 2) == 0}">
+                            <tr class="alternate-row">
+                            </c:if>
+                            <c:if test="${(i.index mod 2) != 0}">
+                                <tr>
+                                </c:if>
+                                <td>${flight.getFlightNumber()}</td>
+                                <td>${flight.getFlightName()}</td>
+                                <td>${flight.getCompanyId().getCompanyName()}</td>
+                                <td>${flight.getSourceId().getAerodrumName()}</td>
+                                <td>${flight.getDestinationId().getAerodrumName()}</td>
+                                <td>${flight.getDepartureTime().toString()}</td>
+                                <td>${flight.getArrivalTime().toString()}</td>
+                                <td><a href="cancelflighthandler?flightId=${flight.getFlightNumber()}"><b>CLICK HERE TO CANCEL</b></a></td>
+                            </tr>
+                        </c:forEach>
                 </table>
                 <table border="0" cellpadding="0" cellspacing="0" id="paging-table">
                     <tr>
