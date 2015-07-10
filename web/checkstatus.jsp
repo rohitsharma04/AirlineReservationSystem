@@ -1,3 +1,7 @@
+<%@page import="entity.FlightFareMap"%>
+<%@page import="java.sql.Date"%>
+<%@page import="entity.CustomerDetails"%>
+<%@page import="entity.DayMaster"%>
 <%@page import="daolayer.HibernateDAOLayer"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import="entity.AerodrumMaster"%>
@@ -7,12 +11,33 @@
 <%@page import="org.hibernate.Criteria"%>
 <%@page import="entity.FlightMaster"%>
 <%@page import="org.hibernate.Session"%>
+<%!
+    public static int findNumberOfSeats(FlightMaster fm, String date) {
+        Date d = Date.valueOf(date);
+        int bookedSeats = 0;
+        for (CustomerDetails c : fm.getCustomers()) {
+            if (d.getTime() == c.getReservationDate().getTime()) {
+                bookedSeats++;
+            }
+        }
+        int totalSeats = 0;
+        for (FlightFareMap ffm : fm.getFare()) {
+            totalSeats += ffm.getNumberOfSeats();
+        }
+        return totalSeats - bookedSeats;
+    }
+%>
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <title>AirLines | Check Status</title>
         <meta charset="utf-8">
         <link rel="shortcut icon" href="favicon.ico"/>
+        <!-- SWeet Alert -->
+        <script src="dist/jquery-2.1.3.min.js"></script>
+        <script src="dist/sweetalert-dev.js"></script>
+        <link rel="stylesheet" href="dist/sweetalert.css">
+        <!--.......................-->
         <link rel="stylesheet" href="css/reset.css" type="text/css" media="all">
         <link rel="stylesheet" href="css/layout.css" type="text/css" media="all">
         <link rel="stylesheet" href="css/style.css" type="text/css" media="all">
@@ -76,6 +101,13 @@
                                 <span><b>ENTER FLIGHT NO:</b></span>
                                 <input type="text" name="flightno" class="border" pattern="[0-9]+" required oninvalid="setCustomValidity('Please Enter Flight Number')" oninput="setCustomValidity('')"/>
                             </div>
+                            <div class="up" >
+                                <span><b>SELECT DATE :</b></span>
+                                <input type="date" name="date" class="border" id="datePicker"
+                                       required style="margin-left: 30px;"
+                                       oninvalid="setCustomValidity('Please enter your date of Journey')" 
+                                       oninput="setCustomValidity('')">
+                            </div>
                             <input type="submit" value="CHECK STATUS" style="float:left;" class="button2"/>
                         </div>
                     </form>
@@ -87,46 +119,114 @@
                         c.add(Restrictions.eq("flightNumber", Integer.parseInt(request.getParameter("flightno"))));
                         pageContext.setAttribute("listOfFlights", c.list());
                     %>
+                    <c:if test="${listOfFlights.isEmpty()}">
+                        <script type="text/javascript">
+                            swal({
+                                title: "No Flights Found",
+                                text: "Please Make Sure You are Entering the Correct Flight Number",
+                                timer: 2000,
+                                showConfirmButton: false});
+                        </script>
+                        <form action="checkstatus.jsp" method="get">
+                            <div class="cancel" > <!--style="display:none;"--> 
+                                <div class="up">
+                                    <span><b>ENTER FLIGHT NO:</b></span>
+                                    <input type="text" name="flightno" class="border" pattern="[0-9]+" required oninvalid="setCustomValidity('Please Enter Flight Number')" oninput="setCustomValidity('')"/>
+                                </div>
+                                <div class="up" >
+                                    <span><b>SELECT DATE :</b></span>
+                                    <input type="date" name="date" class="border" id="datePicker"
+                                           required style="margin-left: 30px;"
+                                           oninvalid="setCustomValidity('Please enter your date of Journey')" 
+                                           oninput="setCustomValidity('')">
+                                </div>
+                                <input type="submit" value="CHECK STATUS" style="float:left;" class="button2"/>
+                            </div>
+                        </form>
+                    </c:if>
                     <c:if test="${!listOfFlights.isEmpty()}">
-                        <div class="pnr" ><!--style="display:none;"-->
-                            <br>
-                            <span><b>FLIGHT DETAILS OF ${param.flightno} ARE:</b></span>
-                            <table>
-                                <tr>
-                                    <td>Flight Name:</td>
-                                    <td>${listOfFlights.get(0).getFlightName()}</td>
-                                </tr>
-                                <tr>
-                                    <td>Departure City:</td>
-                                    <td>${listOfFlights.get(0).getSourceId().getAerodrumName()}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Destination City:</td>
-                                    <td>${listOfFlights.get(0).getDestinationId().getAerodrumName()}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Date:</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>Arrival Time:</td>
-                                    <td>${listOfFlights.get(0).getArrivalTime()}</td>
-                                </tr>
-                                <tr>
-                                    <td>Departure Time:</td>
-                                    <td>${listOfFlights.get(0).getDepartureTime()}</td>
-                                </tr>
-                                <tr>
-                                    <td>No. of seats available:</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td colspan=2><a href="#" style="float:left;"class="button2"><< BACK</a></td>
-                                </tr>
-                            </table>
-                        </div>
+                        <%
+                            Date date = Date.valueOf(request.getParameter("date"));
+                            Boolean flag = false;
+                            for (DayMaster dm : ((FlightMaster) c.list().get(0)).getDays()) {
+                                if (dm.getDayId() == (date.getDay() + 1)) {
+                                    flag = true;
+                                }
+                            }
+                            pageContext.setAttribute("flag", flag);
+                        %>
+                        <c:if test="${!flag}">
+                            
+                        <script type="text/javascript">
+                            swal({
+                                title: "Not Scheduled",
+                                text: "The Flight is not scheduled on the ${param.date}",
+                                timer: 2000,
+                                showConfirmButton: false});
+                        </script>
+                        <form action="checkstatus.jsp" method="get">
+                            <div class="cancel" > <!--style="display:none;"--> 
+                                <div class="up">
+                                    <span><b>ENTER FLIGHT NO:</b></span>
+                                    <input type="text" name="flightno" class="border" pattern="[0-9]+" required oninvalid="setCustomValidity('Please Enter Flight Number')" oninput="setCustomValidity('')"/>
+                                </div>
+                                <div class="up" >
+                                    <span><b>SELECT DATE :</b></span>
+                                    <input type="date" name="date" class="border" id="datePicker"
+                                           required style="margin-left: 30px;"
+                                           oninvalid="setCustomValidity('Please enter your date of Journey')" 
+                                           oninput="setCustomValidity('')">
+                                </div>
+                                <input type="submit" value="CHECK STATUS" style="float:left;" class="button2"/>
+                            </div>
+                        </form>
+                        </c:if>
+                        <c:if test="${flag}">
+                            <div class="pnr" ><!--style="display:none;"-->
+                                <br>
+                                <span><b>FLIGHT DETAILS OF ${param.flightno} ARE:</b></span>
+                                <table>
+                                    <tr>
+                                        <td>Flight Name:</td>
+                                        <td>${listOfFlights.get(0).getFlightName()}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Departure City:</td>
+                                        <td>${listOfFlights.get(0).getSourceId().getAerodrumName()}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Destination City:</td>
+                                        <td>${listOfFlights.get(0).getDestinationId().getAerodrumName()}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Days:</td>
+                                        <td>
+                                            <c:forEach var="day" items="${listOfFlights.get(0).days}">
+                                                ${day.getDayName()},
+                                            </c:forEach>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Arrival Time:</td>
+                                        <td>${listOfFlights.get(0).getArrivalTime()}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Departure Time:</td>
+                                        <td>${listOfFlights.get(0).getDepartureTime()}</td>
+                                    </tr>
+                                    <% FlightMaster flight = (FlightMaster) c.list().get(0);%>
+                                    <tr>
+                                        <td>No. of seats available:</td>
+                                        <td><%= findNumberOfSeats(flight, request.getParameter("date"))%></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan=2><a href="checkstatus.jsp" style="float:left;"class="button2"><< BACK</a></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </c:if>
                     </c:if>
                 </c:if>
             </section>
