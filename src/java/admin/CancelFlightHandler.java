@@ -6,6 +6,8 @@
 package admin;
 
 import daolayer.HibernateDAOLayer;
+import entity.CustomerDetails;
+import entity.FlightFareMap;
 import entity.FlightMaster;
 import java.io.IOException;
 import javax.servlet.RequestDispatcher;
@@ -21,24 +23,31 @@ public class CancelFlightHandler extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String flightId = request.getParameter("flightId");
+        String message=null;
         try {
-            FlightMaster flight = new FlightMaster();
-            flight.setFlightNumber(Integer.parseInt(flightId));
-
+            FlightMaster flight ;
             Session session = HibernateDAOLayer.getSession();
+            flight = (FlightMaster) session.get(FlightMaster.class,Integer.parseInt(flightId));
+            
             Transaction transaction = session.beginTransaction();
+            for(FlightFareMap ffm : flight.getFare()){
+                session.delete(ffm);
+            }
+            for(CustomerDetails cd : flight.getCustomers()){
+                session.delete(cd);
+            }
             session.delete(flight);
             transaction.commit();
+            message = "Flight Number " + flightId + " Cancelled Successfully !!!";
         } catch (Exception e) {
-            String message = "Error : " + e.getMessage();
+            message = "Error : " + e.getMessage();
+            e.printStackTrace();
+        } finally {
             request.setAttribute("message", message);
             RequestDispatcher dispatcher = request.getRequestDispatcher("cancelflight.jsp");
             dispatcher.forward(request, response);
+
         }
-        String message = "Flight Number " + flightId + " Cancelled Successfully !!!";
-        request.setAttribute("message", message);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("cancelflight.jsp");
-        dispatcher.forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
