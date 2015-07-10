@@ -11,8 +11,10 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Projections;
 
 public class ReservationHandler extends HttpServlet {
 
@@ -21,6 +23,7 @@ public class ReservationHandler extends HttpServlet {
         String flightNumber = request.getParameter("flightNumber");
         String classId = request.getParameter("class");
         //has to be added in the database was not given in the question
+        int pnrNumber=0;
         String dateOfJourney = request.getParameter("dateOfJourney");
         String passengerName = request.getParameter("passengerName");
         String gender = request.getParameter("gender");
@@ -55,14 +58,20 @@ public class ReservationHandler extends HttpServlet {
             Transaction transaction = session.beginTransaction();
             session.save(customer);
             transaction.commit();
+
+            //Finding the PNR
+            Criteria cr = session.createCriteria(CustomerDetails.class);
+            cr.setProjection(Projections.max("pnrNumber"));
+            pnrNumber = Integer.parseInt(cr.list().get(0).toString());
         } catch (Exception e) {
             e.printStackTrace();
             String message = "Error : " + e.toString();
-            request.setAttribute("message", message);
+            request.setAttribute("emessage", message);
             RequestDispatcher dispatcher = request.getRequestDispatcher("bookings.jsp");
             dispatcher.forward(request, response);
         }
-        String message = "Your Reservation was Successfully !!!";
+        String message = "Your Reservation was Successful!!!";
+        request.setAttribute("pnrNumber", pnrNumber);
         request.setAttribute("message", message);
         RequestDispatcher dispatcher = request.getRequestDispatcher("bookings.jsp");
         dispatcher.forward(request, response);
