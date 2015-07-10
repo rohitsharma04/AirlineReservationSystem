@@ -1,3 +1,4 @@
+<%@page import="org.hibernate.criterion.Projections"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import="entity.CompanyMaster"%>
 <%@page import="java.util.List"%>
@@ -6,9 +7,27 @@
 <%@page import="org.hibernate.Session"%>
 <%@page import="daolayer.HibernateDAOLayer"%>
 <%
+    int pageSize, numberOfRows, pageNumber;
     Session s = HibernateDAOLayer.getSession();
-    Criteria c = s.createCriteria(FlightMaster.class);
-    pageContext.setAttribute("listOfFlights", c.list());
+    Criteria c1 = s.createCriteria(FlightMaster.class);
+    c1.setProjection(Projections.rowCount());
+    pageSize = 1;
+    numberOfRows = Integer.parseInt(c1.list().get(0).toString());
+    if (request.getParameter("pageNumber") == null) {
+        pageNumber = 1;
+    } else {
+        try {
+            pageNumber = Integer.parseInt(request.getParameter("pageNumber"));
+        } catch (NumberFormatException e) {
+            pageNumber = 1;
+        }
+    }
+    Criteria c2 = s.createCriteria(FlightMaster.class);
+    c2.setFirstResult((pageNumber - 1) * pageSize);
+    c2.setMaxResults(pageSize);
+    pageContext.setAttribute("listOfFlights", c2.list());
+    pageContext.setAttribute("pageNumber", pageNumber);
+    pageContext.setAttribute("numberOfPages", Math.round((double) numberOfRows / pageSize));
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -32,8 +51,6 @@
                 });
             });
         </script>  
-
-
         <!--  styled select box script version 1 -->
         <script src="js/jquery/jquery.selectbox-0.5.js" type="text/javascript"></script>
         <script type="text/javascript">
@@ -112,12 +129,7 @@
                                 </div>
                             </li>
                         </ul>
-                        <div class="nav-divider">&nbsp;</div>					
-                        <ul class="select">
-                            <li>
-                                <a href="#"><b>Aerodrum Details</b></a>
-                            </li>
-                        </ul>
+  
                     </div>
                 </div>
             </div>
@@ -131,9 +143,9 @@
                 </div>
                 <%-- Adding Successful or Unsuccessful Flight Cancellation Message --%>
                 <c:if test="${requestScope.message != null}">
-                <div id="page-heading">
-                    <h3>${requestScope.message}</h3>
-                </div>
+                    <div id="page-heading">
+                        <h3>${requestScope.message}</h3>
+                    </div>
                 </c:if>
                 <table border="0" width="100%" cellpadding="0" cellspacing="0" id="product-table">
                     <tr>
@@ -146,7 +158,7 @@
                         <th class="table-header-repeat line-left"><a href="">Arrival Time</a></th>
                         <th class="table-header-options line-left"><a href=""></a></th>
                     </tr>
-                    
+
                     <c:forEach var="flight" items="${listOfFlights}" varStatus="i">
                         <c:if test="${(i.index mod 2) == 0}">
                             <tr class="alternate-row">
@@ -168,22 +180,17 @@
                 <table border="0" cellpadding="0" cellspacing="0" id="paging-table">
                     <tr>
                         <td>
-                            <a href="" class="page-far-left"></a>
-                            <a href="" class="page-left"></a>
-                            <div id="page-info">Page <strong>1</strong> / 15</div>
-                            <a href="" class="page-right"></a>
-                            <a href="" class="page-far-right"></a>
-                        </td>
-                        <td>
-                            <select  class="styledselect_pages">
-                                <option value="">Number of rows</option>
-                                <option value="">1</option>
-                                <option value="">2</option>
-                                <option value="">3</option>
-                            </select>
+                            <c:if test="${pageNumber > 1}">
+                                <a href="cancelflight.jsp?pageNumber=${pageNumber-1}" class="page-left"></a>
+                            </c:if>
+                            <div id="page-info">Page <strong>${pageNumber}</strong> / ${numberOfPages}</div>
+                            <c:if test="${pageNumber < numberOfPages}">
+                                <a href="cancelflight.jsp?pageNumber=${pageNumber+1}" class="page-right"></a>
+                            </c:if>
                         </td>
                     </tr>
                 </table>
+
                 <div class="clear">&nbsp;</div>
             </div>
             <div class="clear">&nbsp;</div>
