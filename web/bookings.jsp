@@ -22,6 +22,12 @@
         <title>AirLines | Bookings</title>
         <meta charset="utf-8">
         <link rel="shortcut icon" href="favicon.ico"/>
+        <!-- SWeet Alert -->
+        <script src="dist/jquery-2.1.3.min.js"></script>
+        <script src="dist/sweetalert-dev.js"></script>
+        <link rel="stylesheet" href="dist/sweetalert.css">
+        <!--.......................-->
+        <!--             -->
         <link rel="stylesheet" href="css/reset.css" type="text/css" media="all">
         <link rel="stylesheet" href="css/layout.css" type="text/css" media="all">
         <link rel="stylesheet" href="css/style.css" type="text/css" media="all">
@@ -36,52 +42,58 @@
         <script type="text/javascript" src="js/html5.js"></script>
         <![endif]-->
     </head>
-    <body id="page2">
-        <!-- START PAGE SOURCE -->
-        <div class="body1">
-            <div class="main">
-                <header>
-                    <div class="wrapper">
-                        <h1><a href="index.jsp" id="logo">AirLines</a><span id="slogan">International Travel</span></h1>
-                        <div class="right">
-                            <nav>
-                                <ul id="top_nav">
-                                    <li><a href="index.jsp"><img src="images/img1.gif" alt=""></a></li>
-                                    <li><a href="#"><img src="images/img2.gif" alt=""></a></li>
-                                    <li class="bg_none"><a href="#"><img src="images/img3.gif" alt=""></a></li>
-                                </ul>
-                            </nav>
-                            <nav>
-                                <ul id="menu">
-                                    <li><a href="index.jsp">Home</a></li>
-                                    <li id="menu_active"><a href="bookings.jsp">Bookings</a></li>
-                                    <li><a href="checkstatus.jsp">Check status</a></li>
-                                    <li><a href="getfare.jsp">Get fare</a></li>
-                                    <li><a href="contacts.jsp">contacts</a></li>
-                                </ul>
-                            </nav>
+    <body id="page2" <c:if test="${requestScope.message != null}"> onload="swal({
+                title: '${requestScope.message}',
+                text: 'Your PNR Number is : ${requestScope.pnrNumber}',
+                type: 'success'
+            });"</c:if>
+            <c:if test="${requestScope.emessage != null}"> onload="swal({
+                title: 'Reservation Failed',
+                text: 'ERROR : ${requestScope.message}',
+                type: 'error'
+            });"</c:if>
+          >
+            <!-- START PAGE SOURCE -->
+            <div class="body1">
+                <div class="main">
+                    <header>
+                        <div class="wrapper">
+                            <h1><a href="index.jsp" id="logo">AirLines</a><span id="slogan">International Travel</span></h1>
+                            <div class="right">
+                                <nav>
+                                    <ul id="top_nav">
+                                        <li><a href="index.jsp"><img src="images/img1.gif" alt=""></a></li>
+                                        <li><a href="#"><img src="images/img2.gif" alt=""></a></li>
+                                        <li class="bg_none"><a href="#"><img src="images/img3.gif" alt=""></a></li>
+                                    </ul>
+                                </nav>
+                                <nav>
+                                    <ul id="menu">
+                                        <li><a href="index.jsp">Home</a></li>
+                                        <li id="menu_active"><a href="bookings.jsp">Bookings</a></li>
+                                        <li><a href="checkstatus.jsp">Check status</a></li>
+                                        <li><a href="getfare.jsp">Get fare</a></li>
+                                        <li><a href="contacts.jsp">contacts</a></li>
+                                    </ul>
+                                </nav>
+                            </div>
                         </div>
-                    </div>
-                </header>
+                    </header>
+                </div>
             </div>
-        </div>
-        <div class="main">
-            <div id="banner">
-                <div class="text1"> COMFORT<span>Guaranteed</span>
+            <div class="main">
+                <div id="banner">
+                    <div class="text1"> COMFORT<span>Guaranteed</span>
 
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="main">
-            <section id="content">
-                <div class="book">
-                    <a href="bookings.jsp" style="float:left;"class="button1 current">RESERVATION OF TICKETS</a>
-                    <a href="cancel.jsp" style="float:left;"class="button1">CANCELLATION OF TICKETS</a>
-                </div>
-                <%-- Printing Message from the addflighthandler --%>
-                <c:if test="${requestScope.message != null}">
-                    <h3 style="color: red;">${requestScope.message}</h3>
-                </c:if>
+            <div class="main">
+                <section id="content">
+                    <div class="book">
+                        <a href="bookings.jsp" style="float:left;"class="button1 current">RESERVATION OF TICKETS</a>
+                        <a href="cancel.jsp" style="float:left;"class="button1">CANCELLATION OF TICKETS</a>
+                    </div>
                 <div class="res">
                     <form method="POST" action="reservationhandler">
                         <table>

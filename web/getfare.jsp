@@ -27,6 +27,12 @@
         <title>AirLines | Get Fare</title>
         <meta charset="utf-8">
         <link rel="shortcut icon" href="favicon.ico"/>
+        <!-- SWeet Alert -->
+        <script src="dist/jquery-2.1.3.min.js"></script>
+        <script src="dist/sweetalert-dev.js"></script>
+        <link rel="stylesheet" href="dist/sweetalert.css">
+        <!--.......................-->
+        <!--             -->
         <link rel="stylesheet" href="css/reset.css" type="text/css" media="all">
         <link rel="stylesheet" href="css/layout.css" type="text/css" media="all">
         <link rel="stylesheet" href="css/style.css" type="text/css" media="all">
@@ -183,7 +189,14 @@
                         </c:if>
                     </c:forEach>
                     <c:if test="${isFlightFound != 'true'}">
-                        <h3 style="font-size:23px;">No Flights Found</h3>
+                        <!-- <h3 style="font-size:23px;">No Flights Found</h3> -->
+                        <script type="text/javascript">
+                            swal({
+                                title: "No Flights Found",
+                                text: "Please Try Searching for Other Fare Details",
+                                timer: 2000,
+                                showConfirmButton: false});
+                        </script>
                     </c:if>
                 </c:if>
             </section>

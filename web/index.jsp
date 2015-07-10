@@ -159,7 +159,14 @@
                         </c:if>
                     </c:forEach>
                     <c:if test="${isFlightFound != 'true'}">
-                        <h3 style="font-size:23px;">No Flights Found</h3>
+                        <!-- <h3 style="font-size:23px;">No Flights Found</h3> -->
+                        <script type="text/javascript">
+                            swal({
+                                title: "No Flights Found", 
+                                text: "Please Try Searching For Other Flights", 
+                                timer: 2000, 
+                                showConfirmButton: false});
+                        </script>
                     </c:if>
                 </c:if>
                 <table class="page_here" >
