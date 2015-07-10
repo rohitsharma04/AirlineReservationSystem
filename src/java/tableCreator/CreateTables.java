@@ -1,5 +1,6 @@
 package tableCreator;
 
+import daolayer.HibernateDAOLayer;
 import entity.AdminDetails;
 import entity.AerodrumMaster;
 import entity.ClassMaster;
@@ -28,5 +29,11 @@ public class CreateTables {
         SchemaExport se = new SchemaExport(cfg);
         se.create(true, true); // (querybuild and show log , execute build query)
         System.out.println("TABLE CREATED !!");
+        //Intialize Database
+        InitializeDataBase.intializeClassMaster();
+        InitializeDataBase.initializeDayMaster();
+        InitializeDataBase.intializeFlightMaster();
+        InitializeDataBase.intializeCustomerDetails();
+        HibernateDAOLayer.stopConnectionProvider();
     }
 }

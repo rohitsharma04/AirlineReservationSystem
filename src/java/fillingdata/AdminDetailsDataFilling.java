@@ -5,11 +5,9 @@
  */
 package fillingdata;
 
-import com.sun.org.apache.xml.internal.security.utils.EncryptionConstants;
 import daolayer.HibernateDAOLayer;
 import encryption.Encrypt;
 import entity.AdminDetails;
-import entity.AerodrumMaster;
 import java.util.Scanner;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
