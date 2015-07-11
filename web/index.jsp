@@ -169,13 +169,6 @@
                         </script>
                     </c:if>
                 </c:if>
-                <table class="page_here" >
-                    <tr>
-                        <td><a href="" class="lpage"></a></td>
-                        <td class="npage">Page 1 / 15</td>
-                        <td><a href="" class="rpage"></a></td>
-                    </tr>
-                </table>
             </section>
         </div>
         <div class="body2">
