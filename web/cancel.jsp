@@ -31,7 +31,7 @@
     </head>
     <body id="page2" <c:if test="${requestScope.message != null}"> onload="swal({
                 title: '${requestScope.message}',
-                text: 'Your Account will be refunded Soon',
+                text: 'Your Amount will be refunded Soon',
                 type: 'success'
             });"</c:if>
         <c:if test="${requestScope.emessage != null}"> onload="swal({

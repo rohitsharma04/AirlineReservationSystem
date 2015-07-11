@@ -65,8 +65,6 @@
                 <div class="nav-outer"> 
                     <div id="nav-right">
                         <div class="nav-divider">&nbsp;</div>
-                        <div class="showhide-account"><img src="images/shared/nav/nav_myaccount.gif" width="93" height="14" alt="" /></div>
-                        <div class="nav-divider">&nbsp;</div>
                         <a href="logout" id="logout"><img src="images/shared/nav/nav_logout.gif" width="64" height="14" alt="" /></a>
                         <div class="clear">&nbsp;</div>
                     </div>
@@ -176,11 +174,11 @@
                     %>
                     <tr>
                         <td><%=c.getClassName()%> Class</td>
-                        <td><input type="text" name="fare<%=c.getClassId()%>" class="border" placeholder="Fare Amount" required oninvalid="setCustomValidity('Please Enter Fare Price')" oninput="setCustomValidity('')"/></td>
+                        <td><input type="text" name="fare<%=c.getClassId()%>" pattern="[0-9]+" class="border" placeholder="Fare Amount" required oninvalid="setCustomValidity('Please Enter Fare Price')" oninput="setCustomValidity('')"/></td>
                     </tr>
                     <tr>
                         <td></td>
-                        <td><input type="text" name="seats<%=c.getClassId()%>" class="border" placeholder="number of seats" required oninvalid="setCustomValidity('Please Enter Number of Seats')" oninput="setCustomValidity('')"/></td>
+                        <td><input type="text" name="seats<%=c.getClassId()%>" pattern="[0-9]+" class="border" placeholder="number of seats" required oninvalid="setCustomValidity('Please Enter Number of Seats')" oninput="setCustomValidity('')"/></td>
                     </tr>
                     <% }%>
 
