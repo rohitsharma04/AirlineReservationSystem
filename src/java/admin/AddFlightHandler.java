@@ -119,11 +119,11 @@ public class AddFlightHandler extends HttpServlet {
             transaction.commit();
         } catch (Exception e) {
             String message = "Error : " + e.getMessage();
-            request.setAttribute("message", message);
+            request.setAttribute("emessage", message);
             RequestDispatcher dispatcher = request.getRequestDispatcher("addflight.jsp");
             dispatcher.forward(request, response);
         }
-        String message = "Flight Added Successfully !!!";
+        String message = "Flight "+flightName+" Added Successfully !!!";
         request.setAttribute("message", message);
         RequestDispatcher dispatcher = request.getRequestDispatcher("addflight.jsp");
         dispatcher.forward(request, response);

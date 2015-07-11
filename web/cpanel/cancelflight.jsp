@@ -35,129 +35,140 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <title>Cancel Flights</title>
         <link rel="shortcut icon" href="../favicon.ico"/>
-        <link rel="stylesheet" href="css/screen.css" type="text/css" media="screen" title="default" />
-        <script src="js/jquery/jquery-1.4.1.min.js" type="text/javascript"></script>
-        <!--  checkbox styling script -->
-        <script src="js/jquery/ui.core.js" type="text/javascript"></script>
-        <script src="js/jquery/ui.checkbox.js" type="text/javascript"></script>
-        <script src="js/jquery/jquery.bind.js" type="text/javascript"></script>
-        <script type="text/javascript">
-            $(function () {
-                $('input').checkBox();
-                $('#toggle-all').click(function () {
-                    $('#toggle-all').toggleClass('toggle-checked');
-                    $('#mainform input[type=checkbox]').checkBox('toggle');
-                    return false;
+        <!-- SWeet Alert -->
+        <script src="../dist/jquery-2.1.3.min.js"></script>
+        <script src="../dist/sweetalert-dev.js"></script>
+        <link rel="stylesheet" href="../dist/sweetalert.css">
+            <!--.......................-->
+            <!--             -->
+            <link rel="stylesheet" href="css/screen.css" type="text/css" media="screen" title="default" />
+            <script src="js/jquery/jquery-1.4.1.min.js" type="text/javascript"></script>
+            <!--  checkbox styling script -->
+            <script src="js/jquery/ui.core.js" type="text/javascript"></script>
+            <script src="js/jquery/ui.checkbox.js" type="text/javascript"></script>
+            <script src="js/jquery/jquery.bind.js" type="text/javascript"></script>
+            <script type="text/javascript">
+                $(function () {
+                    $('input').checkBox();
+                    $('#toggle-all').click(function () {
+                        $('#toggle-all').toggleClass('toggle-checked');
+                        $('#mainform input[type=checkbox]').checkBox('toggle');
+                        return false;
+                    });
                 });
-            });
-        </script>  
-        <!--  styled select box script version 1 -->
-        <script src="js/jquery/jquery.selectbox-0.5.js" type="text/javascript"></script>
-        <script type="text/javascript">
-            $(document).ready(function () {
-                $('.styledselect').selectbox({inputClass: "selectbox_styled"});
-            });
-        </script>
-
-
-        <![endif]>
-
-        <!--  styled select box script version 2 --> 
-        <script src="js/jquery/jquery.selectbox-0.5_style_2.js" type="text/javascript"></script>
-        <script type="text/javascript">
-            $(document).ready(function () {
-                $('.styledselect_form_1').selectbox({inputClass: "styledselect_form_1"});
-                $('.styledselect_form_2').selectbox({inputClass: "styledselect_form_2"});
-            });
-        </script>
-
-        <!--  styled select box script version 3 --> 
-        <script src="js/jquery/jquery.selectbox-0.5_style_2.js" type="text/javascript"></script>
-        <script type="text/javascript">
-            $(document).ready(function () {
-                $('.styledselect_pages').selectbox({inputClass: "styledselect_pages"});
-            });
-        </script>
-
-        <!--  styled file upload script --> 
-        <script src="js/jquery/jquery.filestyle.js" type="text/javascript"></script>
-        <script type="text/javascript" charset="utf-8">
-            $(function () {
-                $("input.file_1").filestyle({
-                    image: "images/forms/choose-file.gif",
-                    imageheight: 21,
-                    imagewidth: 78,
-                    width: 310
+            </script>  
+            <!--  styled select box script version 1 -->
+            <script src="js/jquery/jquery.selectbox-0.5.js" type="text/javascript"></script>
+            <script type="text/javascript">
+                $(document).ready(function () {
+                    $('.styledselect').selectbox({inputClass: "selectbox_styled"});
                 });
-            });
-        </script>
+            </script>
 
-        <!-- Custom jquery scripts -->
-        <script src="js/jquery/custom_jquery.js" type="text/javascript"></script>
 
-        <!-- MUST BE THE LAST SCRIPT IN <HEAD></HEAD></HEAD> png fix -->
-        <script src="js/jquery/jquery.pngFix.pack.js" type="text/javascript"></script>
-        <script type="text/javascript">
-            $(document).ready(function () {
-                $(document).pngFix( );
-            });
-        </script>
+            <![endif]>
+
+            <!--  styled select box script version 2 --> 
+            <script src="js/jquery/jquery.selectbox-0.5_style_2.js" type="text/javascript"></script>
+            <script type="text/javascript">
+                $(document).ready(function () {
+                    $('.styledselect_form_1').selectbox({inputClass: "styledselect_form_1"});
+                    $('.styledselect_form_2').selectbox({inputClass: "styledselect_form_2"});
+                });
+            </script>
+
+            <!--  styled select box script version 3 --> 
+            <script src="js/jquery/jquery.selectbox-0.5_style_2.js" type="text/javascript"></script>
+            <script type="text/javascript">
+                $(document).ready(function () {
+                    $('.styledselect_pages').selectbox({inputClass: "styledselect_pages"});
+                });
+            </script>
+
+            <!--  styled file upload script --> 
+            <script src="js/jquery/jquery.filestyle.js" type="text/javascript"></script>
+            <script type="text/javascript" charset="utf-8">
+                $(function () {
+                    $("input.file_1").filestyle({
+                        image: "images/forms/choose-file.gif",
+                        imageheight: 21,
+                        imagewidth: 78,
+                        width: 310
+                    });
+                });
+            </script>
+
+            <!-- Custom jquery scripts -->
+            <script src="js/jquery/custom_jquery.js" type="text/javascript"></script>
+
+            <!-- MUST BE THE LAST SCRIPT IN <HEAD></HEAD></HEAD> png fix -->
+            <script src="js/jquery/jquery.pngFix.pack.js" type="text/javascript"></script>
+            <script type="text/javascript">
+                $(document).ready(function () {
+                    $(document).pngFix( );
+                });
+            </script>
     </head>
-    <body> 
-        <div id="page-top-outer">  
-            <h1>WELCOME TO THE ADMIN PANEL OF AIRLINE RESERVATION SYSTEM</h1>
-        </div>
-        <div class="nav-outer-repeat"> 
-            <div class="nav-outer"> 
-                <div id="nav-right">
-                    <div class="nav-divider">&nbsp;</div>
-                    <div class="showhide-account"><img src="images/shared/nav/nav_myaccount.gif" width="93" height="14" alt="" /></div>
-                    <div class="nav-divider">&nbsp;</div>
-                    <a href="logout" id="logout"><img src="images/shared/nav/nav_logout.gif" width="64" height="14" alt="" /></a>
-                    <div class="clear">&nbsp;</div>
-                </div>
-                <div class="nav">
-                    <div class="table">
-                        <ul class="current">
-                            <li><a href="#"><b>Flight Details</b></a>
-                                <div class="select_sub show">
-                                    <ul class="sub">
-                                        <li><a href="index.jsp">View all flight</a></li>
-                                        <li><a href="addflight.jsp">Add flight</a></li>
-                                        <li class="sub_show"><a href="#">Cancel flight</a></li>
-                                    </ul>
-                                </div>
-                            </li>
-                        </ul>
+    <body
+        <c:if test="${requestScope.message != null}"> onload="swal({
+                    title: 'Cancellation Succeeded',
+                    text: '',
+                    type: 'success'
+                });"</c:if>
+        <c:if test="${requestScope.emessage != null}"> onload="swal({
+                    title: 'Flight Cancellation Failed',
+                    text: 'ERROR : ${requestScope.emessage}',
+                    type: 'error'
+                });"</c:if>
+            > 
+            <div id="page-top-outer">  
+                <h1>WELCOME TO THE ADMIN PANEL OF AIRLINE RESERVATION SYSTEM</h1>
+            </div>
+            <div class="nav-outer-repeat"> 
+                <div class="nav-outer"> 
+                    <div id="nav-right">
+                        <div class="nav-divider">&nbsp;</div>
+                        <div class="showhide-account"><img src="images/shared/nav/nav_myaccount.gif" width="93" height="14" alt="" /></div>
+                        <div class="nav-divider">&nbsp;</div>
+                        <a href="logout" id="logout"><img src="images/shared/nav/nav_logout.gif" width="64" height="14" alt="" /></a>
+                        <div class="clear">&nbsp;</div>
+                    </div>
+                    <div class="nav">
+                        <div class="table">
+                            <ul class="current">
+                                <li><a href="#"><b>Flight Details</b></a>
+                                    <div class="select_sub show">
+                                        <ul class="sub">
+                                            <li><a href="index.jsp">View all flight</a></li>
+                                            <li><a href="addflight.jsp">Add flight</a></li>
+                                            <li class="sub_show"><a href="#">Cancel flight</a></li>
+                                        </ul>
+                                    </div>
+                                </li>
+                            </ul>
 
+                        </div>
                     </div>
                 </div>
+                <div class="clear"></div>
             </div>
             <div class="clear"></div>
-        </div>
-        <div class="clear"></div>
-        <div id="content-outer">
-            <div id="content">
-                <div id="page-heading">
-                    <h2>Cancel Flight</h2>
-                </div>
-                <%-- Adding Successful or Unsuccessful Flight Cancellation Message --%>
-                <c:if test="${requestScope.message != null}">
+            <div id="content-outer">
+                <div id="content">
                     <div id="page-heading">
-                        <h3>${requestScope.message}</h3>
+                        <h2>Cancel Flight</h2>
                     </div>
-                </c:if>
-                <table border="0" width="100%" cellpadding="0" cellspacing="0" id="product-table">
-                    <tr>
-                        <th class="table-header-repeat line-left minwidth-1"><a href="">Flight No.</a>	</th>
-                        <th class="table-header-repeat line-left "><a href="">Flight Name</a></th>
-                        <th class="table-header-repeat line-left"><a href="">Company Name</a></th>
-                        <th class="table-header-repeat line-left"><a href="">Source Name</a></th>
-                        <th class="table-header-repeat line-left"><a href="">Destination Name</a></th>
-                        <th class="table-header-repeat line-left"><a href="">Departure Time</a></th>
-                        <th class="table-header-repeat line-left"><a href="">Arrival Time</a></th>
-                        <th class="table-header-options line-left"><a href=""></a></th>
-                    </tr>
+                    <table border="0" width="100%" cellpadding="0" cellspacing="0" id="product-table">
+                        <tr>
+                            <th class="table-header-repeat line-left minwidth-1"><a href="">Flight No.</a>	</th>
+                            <th class="table-header-repeat line-left "><a href="">Flight Name</a></th>
+                            <th class="table-header-repeat line-left"><a href="">Company Name</a></th>
+                            <th class="table-header-repeat line-left"><a href="">Source Name</a></th>
+                            <th class="table-header-repeat line-left"><a href="">Destination Name</a></th>
+                            <th class="table-header-repeat line-left"><a href="">Departure Time</a></th>
+                            <th class="table-header-repeat line-left"><a href="">Arrival Time</a></th>
+                            <th class="table-header-options line-left"><a href=""></a></th>
+                        </tr>
 
                     <c:forEach var="flight" items="${listOfFlights}" varStatus="i">
                         <c:if test="${(i.index mod 2) == 0}">
@@ -173,9 +184,19 @@
                                 <td>${flight.getDestinationId().getAerodrumName()}</td>
                                 <td>${flight.getDepartureTime().toString()}</td>
                                 <td>${flight.getArrivalTime().toString()}</td>
-                                <td><a href="cancelflighthandler?flightId=${flight.getFlightNumber()}" class="warning cancel"
-                                       onclick="return confirm('Are you sure to delete ?')">
-                                        <b>CLICK HERE TO CANCEL</b></a>
+                                <td><button class="back-login"
+                                            onclick="swal({title: 'Are you sure to delete?',
+                                                    text: 'It will Delete All the Reservations to this flight!',
+                                                    type: 'warning',
+                                                    showCancelButton: true,
+                                                    confirmButtonColor: '#DD6B55',
+                                                    confirmButtonText: 'Yes, delete it!',
+                                                    closeOnConfirm: false
+                                                },
+                                                function () {
+                                                    window.location.href = 'cancelflighthandler?flightId=${flight.getFlightNumber()}';
+                                                });" >DELETE
+                                    </button>
                                 </td>
                             </tr>
                         </c:forEach>

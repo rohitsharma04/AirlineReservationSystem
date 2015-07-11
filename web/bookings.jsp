@@ -49,7 +49,7 @@
             });"</c:if>
             <c:if test="${requestScope.emessage != null}"> onload="swal({
                 title: 'Reservation Failed',
-                text: 'ERROR : ${requestScope.message}',
+                text: 'ERROR : ${requestScope.emessage}',
                 type: 'error'
             });"</c:if>
           >

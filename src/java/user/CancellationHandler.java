@@ -30,9 +30,10 @@ public class CancellationHandler extends HttpServlet
             c.setPnrNumber(pnr);
             session.delete(c);
             t.commit();
-            out.println("sakshi");
-            request.setAttribute("msg", "Your booking has been cancelled");
-            RequestDispatcher rd = request.getRequestDispatcher("cancelmessage.jsp");
+            //out.println("sakshi");
+            request.setAttribute("message", "Your Reservation for PNR "+pnrno+" has been cancelled");
+            
+            RequestDispatcher rd = request.getRequestDispatcher("cancel.jsp");
             rd.forward(request, response);
           //  response.sendRedirect("cancel.jsp");
         }
@@ -40,8 +41,8 @@ public class CancellationHandler extends HttpServlet
         {
             e.printStackTrace();
             String message = "Error : " + e.toString();
-            request.setAttribute("message", message);
-            RequestDispatcher dispatcher = request.getRequestDispatcher("cancelmessage.jsp");
+            request.setAttribute("emessage", message);
+            RequestDispatcher dispatcher = request.getRequestDispatcher("cancel.jsp");
             dispatcher.forward(request, response);
         }
         

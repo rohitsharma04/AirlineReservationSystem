@@ -1,4 +1,5 @@
 <%-- Getting data from the Database to show Companies, Aerodrums(source and destinations) --%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import="entity.ClassMaster"%>
 <%@page import="entity.DayMaster"%>
 <%@page import="entity.AerodrumMaster"%>
@@ -10,7 +11,6 @@
 <%@page import="org.hibernate.Session"%>
 <%
     Session s = HibernateDAOLayer.getSession();
-
     //Getting Companies from Company Master
     Criteria c1 = s.createCriteria(CompanyMaster.class);
     List<CompanyMaster> listOfCompanies = c1.list();
@@ -31,77 +31,78 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <title>ADMIN PANEL | Add Flight</title>
         <link rel="shortcut icon" href="../favicon.ico"/>
-        <link rel="stylesheet" href="css/screen.css" type="text/css" media="screen" title="default" />
-        <script src="js/jquery/jquery-1.4.1.min.js" type="text/javascript"></script> 
-        <script src="js/jquery/custom_jquery.js" type="text/javascript"></script>
-        <script src="js/jquery/jquery.pngFix.pack.js" type="text/javascript"></script>
-        <script type="text/javascript">
-            $(document).ready(function () {
-                $(document).pngFix( );
-            });
-        </script>
+        <!-- SWeet Alert -->
+        <script src="../dist/jquery-2.1.3.min.js"></script>
+        <script src="../dist/sweetalert-dev.js"></script>
+        <link rel="stylesheet" href="../dist/sweetalert.css">
+            <!--.......................-->
+            <!--             -->
+            <link rel="stylesheet" href="css/screen.css" type="text/css" media="screen" title="default" />
+            <script src="js/jquery/jquery-1.4.1.min.js" type="text/javascript"></script> 
+            <script src="js/jquery/custom_jquery.js" type="text/javascript"></script>
+            <script src="js/jquery/jquery.pngFix.pack.js" type="text/javascript"></script>
+            <script type="text/javascript">
+                $(document).ready(function () {
+                    $(document).pngFix( );
+                });
+            </script>
     </head>
-    <body>
-        <div id="page-top-outer">  
-            <h1>WELCOME TO THE ADMIN PANEL OF AIRLINE RESERVATION SYSTEM</h1>
-        </div>
-        <div class="nav-outer-repeat"> 
-            <div class="nav-outer"> 
-                <div id="nav-right">
-                    <div class="nav-divider">&nbsp;</div>
-                    <div class="showhide-account"><img src="images/shared/nav/nav_myaccount.gif" width="93" height="14" alt="" /></div>
-                    <div class="nav-divider">&nbsp;</div>
-                    <a href="logout" id="logout"><img src="images/shared/nav/nav_logout.gif" width="64" height="14" alt="" /></a>
-                    <div class="clear">&nbsp;</div>
-                </div>
-                <div class="nav">
-                    <div class="table">
-                        <ul class="current">
-                            <li><a href="#"><b>Flight Details</b></a>
-                                <div class="select_sub show">
-                                    <ul class="sub">
-                                        <li><a href="index.jsp">View all flight</a></li>
-                                        <li  class="sub_show"><a href="#">Add flight</a></li>
-                                        <li><a href="cancelflight.jsp">Cancel flight</a></li>
-                                    </ul>
-                                </div>
-                            </li>
-                        </ul>
+    <body <c:if test="${requestScope.message != null}"> onload="swal({
+                title: '${requestScope.message}',
+                text: '',
+                type: 'success'
+            });"</c:if>
+        <c:if test="${requestScope.emessage != null}"> onload="swal({
+                    title: 'Flight Adding Failed',
+                    text: 'ERROR : ${requestScope.emessage}',
+                    type: 'error'
+                });"</c:if>
+            >
+            <div id="page-top-outer">  
+                <h1>WELCOME TO THE ADMIN PANEL OF AIRLINE RESERVATION SYSTEM</h1>
+            </div>
+            <div class="nav-outer-repeat"> 
+                <div class="nav-outer"> 
+                    <div id="nav-right">
+                        <div class="nav-divider">&nbsp;</div>
+                        <div class="showhide-account"><img src="images/shared/nav/nav_myaccount.gif" width="93" height="14" alt="" /></div>
+                        <div class="nav-divider">&nbsp;</div>
+                        <a href="logout" id="logout"><img src="images/shared/nav/nav_logout.gif" width="64" height="14" alt="" /></a>
+                        <div class="clear">&nbsp;</div>
+                    </div>
+                    <div class="nav">
+                        <div class="table">
+                            <ul class="current">
+                                <li><a href="#"><b>Flight Details</b></a>
+                                    <div class="select_sub show">
+                                        <ul class="sub">
+                                            <li><a href="index.jsp">View all flight</a></li>
+                                            <li  class="sub_show"><a href="#">Add flight</a></li>
+                                            <li><a href="cancelflight.jsp">Cancel flight</a></li>
+                                        </ul>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
+                <div class="clear"></div>
             </div>
             <div class="clear"></div>
-        </div>
-        <div class="clear"></div>
-        <div id="page-heading"><h2>Add flight</h2></div>
-        <div class="add">
-            <form method="post" action="addflighthandler">
-                <table>
-                    <%-- Printing Message from the addflighthandler --%>
-                    <%
-                        String message = (String) request.getAttribute("message");
-                        if (message != null) {
-                    %>
-                    <tr>
-                        <td colspan="2">
-                            <h3 style="color: red;"><%=message%></h3>
-                        </td>
-                    </tr>
-                    <%
-                        }
-                    %>
-
-
-                    <tr>
-                        <td colspan="2">
-                            <h3> Flight Details </h3>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Company Name:</td>
-                        <td>
-                            <select class="border" name="companyId" required oninvalid="setCustomValidity('Please Select a Company')" oninput="setCustomValidity('')">
-                                <option selected value="">SELECT COMPANY</option>
+            <div id="page-heading"><h2>Add flight</h2></div>
+            <div class="add">
+                <form method="post" action="addflighthandler">
+                    <table>
+                        <tr>
+                            <td colspan="2">
+                                <h3> Flight Details </h3>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Company Name:</td>
+                            <td>
+                                <select class="border" name="companyId" required oninvalid="setCustomValidity('Please Select a Company')" oninput="setCustomValidity('')">
+                                    <option selected value="">SELECT COMPANY</option>
                                 <%                                    for (CompanyMaster company : listOfCompanies) {
                                 %>
                                 <option value="<%=company.getCompanyId()%>"><%=company.getCompanyName()%></option>

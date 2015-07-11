@@ -41,6 +41,7 @@ public class CancelFlightHandler extends HttpServlet {
             message = "Flight Number " + flightId + " Cancelled Successfully !!!";
         } catch (Exception e) {
             message = "Error : " + e.getMessage();
+            request.setAttribute("emessage", message);
             e.printStackTrace();
         } finally {
             request.setAttribute("message", message);
