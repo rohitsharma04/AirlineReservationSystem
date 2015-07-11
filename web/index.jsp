@@ -100,7 +100,7 @@
                                 <select class="border" name="from" required oninvalid="setCustomValidity('Please Choose Source City')" oninput="setCustomValidity('')">
                                     <option value="">SELECT CITY</option>
                                     <c:forEach var="aerodrum" items="${listOfAerodrums}">
-                                        <option value="${aerodrum.getAerodrumId()}">${aerodrum.getAerodrumName()}</option>
+                                        <option value="${aerodrum.getAerodrumId()}">${aerodrum.getCity()}</option>
                                     </c:forEach>
                                 </select>
                             </div>
@@ -109,7 +109,7 @@
                                 <select class="border" name="to" required oninvalid="setCustomValidity('Please Choose Destination City')" oninput="setCustomValidity('')">
                                     <option value="">SELECT CITY</option>
                                     <c:forEach var="aerodrum" items="${listOfAerodrums}">
-                                        <option value="${aerodrum.getAerodrumId()}">${aerodrum.getAerodrumName()}</option>
+                                        <option value="${aerodrum.getAerodrumId()}">${aerodrum.getCity()}</option>
                                     </c:forEach>
                                 </select>
                             </div>	
