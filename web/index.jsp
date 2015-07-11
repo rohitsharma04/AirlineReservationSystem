@@ -58,8 +58,8 @@
                             <nav>
                                 <ul id="top_nav">
                                     <li><a href="#"><img src="images/img1.gif" alt=""></a></li>
-                                    <li><a href="#"><img src="images/img2.gif" alt=""></a></li>
-                                    <li class="bg_none"><a href="#"><img src="images/img3.gif" alt=""></a></li>
+                                    <li><a href="contacts.jsp"><img src="images/img2.gif" alt=""></a></li>
+                                    <li class="bg_none"><a href="adminlogin.jsp"><img src="images/img3.gif" alt=""></a></li>
                                 </ul>
                             </nav>
                             <nav>

@@ -47,12 +47,12 @@
                 text: 'Your PNR Number is : ${requestScope.pnrNumber}',
                 type: 'success'
             });"</c:if>
-            <c:if test="${requestScope.emessage != null}"> onload="swal({
-                title: 'Reservation Failed',
-                text: 'ERROR : ${requestScope.emessage}',
-                type: 'error'
-            });"</c:if>
-          >
+        <c:if test="${requestScope.emessage != null}"> onload="swal({
+                        title: 'Reservation Failed',
+                        text: 'ERROR : ${requestScope.emessage}',
+                        type: 'error'
+                    });"</c:if>
+            >
             <!-- START PAGE SOURCE -->
             <div class="body1">
                 <div class="main">
@@ -60,11 +60,12 @@
                         <div class="wrapper">
                             <h1><a href="index.jsp" id="logo">AirLines</a><span id="slogan">International Travel</span></h1>
                             <div class="right">
+
                                 <nav>
                                     <ul id="top_nav">
                                         <li><a href="index.jsp"><img src="images/img1.gif" alt=""></a></li>
-                                        <li><a href="#"><img src="images/img2.gif" alt=""></a></li>
-                                        <li class="bg_none"><a href="#"><img src="images/img3.gif" alt=""></a></li>
+                                        <li><a href="contacts.jsp"><img src="images/img2.gif" alt=""></a></li>
+                                        <li class="bg_none"><a href="adminlogin.jsp"><img src="images/img3.gif" alt=""></a></li>
                                     </ul>
                                 </nav>
                                 <nav>
@@ -94,22 +95,22 @@
                         <a href="bookings.jsp" style="float:left;"class="button1 current">RESERVATION OF TICKETS</a>
                         <a href="cancel.jsp" style="float:left;"class="button1">CANCELLATION OF TICKETS</a>
                     </div>
-                <div class="res">
-                    <form method="POST" action="reservationhandler">
-                        <table>
-                            <tr>
-                                <td colspan="2">
-                                    <h2>Flight Details</h2>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Flight Number:</td>
-                                <td>
-                                    <input type="text" name="flightNumber" class="border" 
-                                           required oninvalid="setCustomValidity('Please Enter Correct Flight Number')" oninput="setCustomValidity('')"
-                                           value ="${param.flightNumber}" 
-                                           <c:if test="${param.flightNumber != null}">readonly="true"</c:if>
-                                               />
+                    <div class="res">
+                        <form method="POST" action="reservationhandler">
+                            <table>
+                                <tr>
+                                    <td colspan="2">
+                                        <h2>Flight Details</h2>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Flight Number:</td>
+                                    <td>
+                                        <input type="text" name="flightNumber" class="border" 
+                                               required oninvalid="setCustomValidity('Please Enter Correct Flight Number')" oninput="setCustomValidity('')"
+                                               value ="${param.flightNumber}" 
+                                        <c:if test="${param.flightNumber != null}">readonly="true"</c:if>
+                                            />
                                     </td>
                                 </tr>
 

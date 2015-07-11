@@ -55,13 +55,15 @@
                     <div class="wrapper">
                         <h1><a href="index.jsp" id="logo">AirLines</a><span id="slogan">International Travel</span></h1>
                         <div class="right">
+                            
                             <nav>
                                 <ul id="top_nav">
                                     <li><a href="index.jsp"><img src="images/img1.gif" alt=""></a></li>
-                                    <li><a href="#"><img src="images/img2.gif" alt=""></a></li>
-                                    <li class="bg_none"><a href="#"><img src="images/img3.gif" alt=""></a></li>
+                                    <li><a href="contacts.jsp"><img src="images/img2.gif" alt=""></a></li>
+                                    <li class="bg_none"><a href="adminlogin.jsp"><img src="images/img3.gif" alt=""></a></li>
                                 </ul>
                             </nav>
+
                             <nav>
                                 <ul id="menu">
                                     <li><a href="index.jsp">Home</a></li>
@@ -85,54 +87,56 @@
         </div>
         <div class="main">
             <section id="content">
-                <div class="res"><!--style="display:none;"-->
-                    <form method="get" action="getfare.jsp">
-                        <table>
-                            <tr>
-                                <td>Departure City:</td>
-                                <td>
-                                    <select class="border" name="sourceId" required oninvalid="setCustomValidity('Please Choose Source City')" oninput="setCustomValidity('')">
-                                        <option value="">SELECT CITY</option>
-                                        <c:forEach var="aerodrum" items="${listOfAerodrums}">
-                                            <option value="${aerodrum.getAerodrumId()}">${aerodrum.getCity()}</option>
-                                        </c:forEach>
-                                    </select>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Destination City:</td>
-                                <td>
-                                    <select class="border" name="destinationId" required oninvalid="setCustomValidity('Please Choose Destination City')" oninput="setCustomValidity('')">
-                                        <option value="">SELECT CITY</option>
-                                        <c:forEach var="aerodrum" items="${listOfAerodrums}">
-                                            <option value="${aerodrum.getAerodrumId()}">${aerodrum.getCity()}</option>
-                                        </c:forEach>
-                                    </select>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Date:</td>
-                                <td><input type="date" name="date" id="datePicker" class="border"  required oninvalid="setCustomValidaty('Please select a Date')"/></td>
-                            </tr>
+                <c:if test="${param.sourceId == null && param.destinationId == null}">
+                    <div class="res"><!--style="display:none;"-->
+                        <form method="get" action="getfare.jsp">
+                            <table>
+                                <tr>
+                                    <td>Departure City:</td>
+                                    <td>
+                                        <select class="border" name="sourceId" required oninvalid="setCustomValidity('Please Choose Source City')" oninput="setCustomValidity('')">
+                                            <option value="">SELECT CITY</option>
+                                            <c:forEach var="aerodrum" items="${listOfAerodrums}">
+                                                <option value="${aerodrum.getAerodrumId()}">${aerodrum.getCity()}</option>
+                                            </c:forEach>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Destination City:</td>
+                                    <td>
+                                        <select class="border" name="destinationId" required oninvalid="setCustomValidity('Please Choose Destination City')" oninput="setCustomValidity('')">
+                                            <option value="">SELECT CITY</option>
+                                            <c:forEach var="aerodrum" items="${listOfAerodrums}">
+                                                <option value="${aerodrum.getAerodrumId()}">${aerodrum.getCity()}</option>
+                                            </c:forEach>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Date:</td>
+                                    <td><input type="date" name="date" id="datePicker" class="border"  required oninvalid="setCustomValidaty('Please select a Date')"/></td>
+                                </tr>
 
-                            <tr>
-                                <td>Class:</td>
-                                <td>
-                                    <select class="border" name="classId" value="---CHOOSE CLASS---" required oninvalid="setCustomValidity('Please Choose Class')" oninput="setCustomValidity('')">
-                                        <option value="">SELECT CLASS </option>
-                                        <c:forEach var="c" items="${listOfClasses}">
-                                            <option value="${c.getClassId()}">${c.getClassName()} Class</option>
-                                        </c:forEach>
-                                    </select>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="2"><input type="submit" class="button2" style="float: left;" value="GET FARE" /></td>
+                                <tr>
+                                    <td>Class:</td>
+                                    <td>
+                                        <select class="border" name="classId" value="---CHOOSE CLASS---" required oninvalid="setCustomValidity('Please Choose Class')" oninput="setCustomValidity('')">
+                                            <option value="">SELECT CLASS </option>
+                                            <c:forEach var="c" items="${listOfClasses}">
+                                                <option value="${c.getClassId()}">${c.getClassName()} Class</option>
+                                            </c:forEach>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2"><input type="submit" class="button2" style="float: left;" value="GET FARE" /></td>
 
-                            </tr>
-                        </table>
-                    </form>
-                </div>
+                                </tr>
+                            </table>
+                        </form>
+                    </div>
+                </c:if>
                 <%-- Printing Flight Details if found --%>
                 <c:if test="${param.sourceId != null && param.destinationId != null && param.classId != null && param.date != null}">
                     <%
@@ -182,7 +186,7 @@
                                         <td><H3 style="font-size:23px; ">FARE : ${flight.getFare().get(Integer.parseInt(param.classId) - 1).getFare()} INR</H3></td>
                                     </tr>
                                     <tr>
-                                        <td colspan=2><a href="#" style="float:left;"class="button2"><< BACK</a></td>
+                                        <td colspan=2><a href="getfare.jsp" style="float:left;"class="button2"><< BACK</a></td>
                                     </tr>
                                 </table>
                             </div>
@@ -197,6 +201,54 @@
                                 timer: 2000,
                                 showConfirmButton: false});
                         </script>
+                        <div class="res"><!--style="display:none;"-->
+                        <form method="get" action="getfare.jsp">
+                            <table>
+                                <tr>
+                                    <td>Departure City:</td>
+                                    <td>
+                                        <select class="border" name="sourceId" required oninvalid="setCustomValidity('Please Choose Source City')" oninput="setCustomValidity('')">
+                                            <option value="">SELECT CITY</option>
+                                            <c:forEach var="aerodrum" items="${listOfAerodrums}">
+                                                <option value="${aerodrum.getAerodrumId()}">${aerodrum.getCity()}</option>
+                                            </c:forEach>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Destination City:</td>
+                                    <td>
+                                        <select class="border" name="destinationId" required oninvalid="setCustomValidity('Please Choose Destination City')" oninput="setCustomValidity('')">
+                                            <option value="">SELECT CITY</option>
+                                            <c:forEach var="aerodrum" items="${listOfAerodrums}">
+                                                <option value="${aerodrum.getAerodrumId()}">${aerodrum.getCity()}</option>
+                                            </c:forEach>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Date:</td>
+                                    <td><input type="date" name="date" id="datePicker" class="border"  required oninvalid="setCustomValidaty('Please select a Date')"/></td>
+                                </tr>
+
+                                <tr>
+                                    <td>Class:</td>
+                                    <td>
+                                        <select class="border" name="classId" value="---CHOOSE CLASS---" required oninvalid="setCustomValidity('Please Choose Class')" oninput="setCustomValidity('')">
+                                            <option value="">SELECT CLASS </option>
+                                            <c:forEach var="c" items="${listOfClasses}">
+                                                <option value="${c.getClassId()}">${c.getClassName()} Class</option>
+                                            </c:forEach>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2"><input type="submit" class="button2" style="float: left;" value="GET FARE" /></td>
+
+                                </tr>
+                            </table>
+                        </form>
+                    </div>
                     </c:if>
                 </c:if>
             </section>
