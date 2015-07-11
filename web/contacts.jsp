@@ -1,9 +1,16 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <title>AirLines | Contacts</title>
         <meta charset="utf-8">
         <link rel="shortcut icon" href="favicon.ico"/>
+        <!-- SWeet Alert -->
+        <script src="dist/jquery-2.1.3.min.js"></script>
+        <script src="dist/sweetalert-dev.js"></script>
+        <link rel="stylesheet" href="dist/sweetalert.css">
+        <!--.......................-->
+        <!--             -->
         <link rel="stylesheet" href="css/reset.css" type="text/css" media="all">
         <link rel="stylesheet" href="css/layout.css" type="text/css" media="all">
         <link rel="stylesheet" href="css/style.css" type="text/css" media="all">
@@ -14,7 +21,13 @@
         <script type="text/javascript" src="js/Myriad_Pro_italic_400.font.js"></script>
         <script type="text/javascript" src="js/Myriad_Pro_400.font.js"></script>
     </head>
-    <body id="page5">
+    <body id="page5"
+          <c:if test="${param.email != null}"> onload="swal({
+            title: 'Thank You ${param.name} Your Message Has Been Received',
+            text: 'We\'ll Contact You Soon',
+            type: 'success'
+        });"</c:if>
+          >
         <div class="body1">
             <div class="main">
                 <header>
@@ -81,19 +94,19 @@
                         <div>
                             <div class="wrapper">
                                 <div class="bg">
-                                    <input type="text" class="input" pattern="[A-Za-z\s]+" required oninvalid="setCustomValidity('Please Enter Your Name')" oninput="setCustomValidity('')"/>
+                                    <input type="text" name="name" class="input" pattern="[A-Za-z\s]+" required oninvalid="setCustomValidity('Please Enter Your Name')" oninput="setCustomValidity('')"/>
                                 </div>
                                 Your Name:<br />
                             </div>
                             <div class="wrapper">
                                 <div class="bg">
-                                    <input type="email" class="input" required oninvalid="setCustomValidity('Please Enter Your Email')" oninput="setCustomValidity('')"/>
+                                    <input type="email" name="email" class="input" required oninvalid="setCustomValidity('Please Enter Your Email')" oninput="setCustomValidity('')"/>
                                 </div>
                                 Your E-mail:<br />
                             </div>
                             <div class="wrapper">
                                 <div class="bg">
-                                    <textarea name="textarea" cols="1" rows="1" required oninvalid="setCustomValidity('Please Enter Your Message')" oninput="setCustomValidity('')"></textarea>
+                                    <textarea name="textarea" message="message" cols="1" rows="1" required oninvalid="setCustomValidity('Please Enter Your Message')" oninput="setCustomValidity('')"></textarea>
                                 </div>
                                 Your Message:<br />
                             </div>
