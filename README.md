@@ -3,8 +3,8 @@ Project Case Study
 Airline Reservation System
  #
 Airline Reservation System contains airline Schedules, fare tariffs, passenger reservations and ticket records. An airline system direct distribution works within their own reservation system. This project contains following modules:
-# 
-User Module #
+
+# User Module #
 Search for flight (Schedule) according to date, source and destination.
 Reservation of ticket.
 Cancellation of ticket.
@@ -147,17 +147,16 @@ Note :  ClassId field will be mapped with the ClassMaster table.
 
 
 
-# 
-Description: #
-# 
-Admin Module: #
+#Description: #
+
+#Admin Module: #
 
 1. Add New Flight Details :
 Create a form for administrator to add new flight. And insert new entry on FlightMaster table. This form has three combos, one for selection of service Provider Company and two for source and destination aero drum.
 2. Cancel the Flight:
 Create a form where all flight no display on the combo and the admin can select any flight and can delete any of the flight from the FlightMaster table which cannot be operated in future.
-# 
-User Module: #
+
+# User Module: #
 
 1. Search For flight (Schedule):
 Create a form where the user can search any flight on particular date and also can search for all the flight for the particular source to the particular destination. In this form create a link to get availability status of seats in different class.
@@ -176,15 +175,15 @@ The user, in this form, can get the flight status (flight number, flight name, a
 
 
 
-**
-Tools & Technology**
+##Tools & Technology##
 Technology : 
 Server Side : Java(JDK7.0), Servlet2.4, JSP2.0, EL, JSTL
 Client Side : HTML, JavaScript, CSS
 Database : MySQL 5.0
 Framework : Hibernate ORM .
 IDE : NetBeans 8.02.
-**
-Application Developers :**
-## Rohit Sharma ##.
-## Sakshi Maskara ##
+
+
+##Application Developers :##
+### Rohit Sharma ###.
+### Sakshi Maskara ###.
