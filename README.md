@@ -1,7 +1,7 @@
 # J2EE Project -  Summer Training
-Project Case Study
-Airline Reservation System
- #
+
+#Airline Reservation System
+
 Airline Reservation System contains airline Schedules, fare tariffs, passenger reservations and ticket records. An airline system direct distribution works within their own reservation system. This project contains following modules:
 
 #Description: #
@@ -33,14 +33,20 @@ The user, in this form, can get the flight status (flight number, flight name, a
 
 
 ##Tools & Technology##
-Technology : 
+Technology :
+ 
 Server Side : Java(JDK7.0), Servlet2.4, JSP2.0, EL, JSTL
+
 Client Side : HTML, JavaScript, CSS
+
 Database : MySQL 5.0
+
 Framework : Hibernate ORM .
+
 IDE : NetBeans 8.02.
 
 
 ##Application Developers :##
-[Rohit Sharma ](mailto:skyrohithigh@gmail.com).
-[Sakshi Maskara](mailto:sakshimaskara07@gmail.com).
+* **Rohit Sharma([skyrohithigh@gmail.com](mailto:skyrohithigh@gmail.com)).**
+
+* **Sakshi Maskara([sakshimaskara07@gmail.com](mailto:sakshimaskara07@gmail.com)).**
